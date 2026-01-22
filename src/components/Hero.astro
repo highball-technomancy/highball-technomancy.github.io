@@ -1,0 +1,149 @@
+---
+// Hero.astro - Green, prominent scroll arrow
+---
+
+<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+  <!-- HTbg.png background - full left alignment -->
+  <div class="absolute inset-0 z-0 hero-bg">
+    <img 
+      src="/HTbg.png" 
+      alt="Background" 
+      class="w-full h-full object-contain"
+      style="object-position: left center;"
+    />
+    <!-- Dark overlay for text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70"></div>
+  </div>
+  
+  <!-- Minimal particle overlay -->
+  <canvas id="particle-canvas" class="absolute inset-0 z-10"></canvas>
+  
+  <div class="container mx-auto px-6 text-center z-20 relative">
+    <!-- Main headline - THE PITCH -->
+    <h1 class="text-6xl md:text-8xl font-bold mb-6 fade-in text-white drop-shadow-2xl leading-tight">
+      Binary Spirits,<br/>Digital Alchemy
+    </h1>
+    
+    <!-- Subheadline - WHAT WE DO -->
+    <p class="text-2xl md:text-3xl text-gray-300 mb-16 fade-in drop-shadow-lg font-light">
+      AI-powered tools for the curious
+    </p>
+    
+    <!-- Green scroll arrow (prominent) -->
+    <div class="mt-28 flex justify-center fade-in">
+      <a 
+        href="#about" 
+        class="animate-bounce group hover:scale-110 transition-transform duration-300"
+        aria-label="Scroll to learn more"
+      >
+        <svg class="w-12 h-12 text-neon-green drop-shadow-lg group-hover:text-neon-cyan transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-bg {
+    background: #000000; /* Pure black to match image background */
+  }
+  
+  .hero-bg img {
+    /* Show full image without cropping */
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  /* Add subtle animation to background on load */
+  .hero-bg {
+    animation: fadeIn 1.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+<script>
+  // Minimal particle overlay (10 particles, very subtle)
+  const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+  
+  if (canvas && ctx) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    interface Particle {
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+      color: string;
+    }
+    
+    const particles: Particle[] = [];
+    const particleCount = 10;
+    const colors = ['#00c853', '#a855f7', '#00e5ff'];
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.15 + 0.05,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+    
+    function animate() {
+      if (!ctx || !canvas) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((particle, index) => {
+        ctx.globalAlpha = particle.opacity;
+        ctx.fillStyle = particle.color;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+        
+        particles.slice(index + 1).forEach(otherParticle => {
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 200) {
+            ctx.globalAlpha = (1 - distance / 200) * 0.1;
+            ctx.strokeStyle = particle.color;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.stroke();
+          }
+        });
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+</script>

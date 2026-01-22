@@ -1,0 +1,280 @@
+---
+// index.astro - Cleaned up with SVG icons, better messaging, proper disclaimer
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<Layout>
+  <!-- Navigation -->
+  <Navigation>
+    <Logo slot="logo" size="auto" />
+  </Navigation>
+
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-dark-bg-alt">
+    <div class="container mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-6 glow-purple">What is Highball Technomancy?</h2>
+      <p class="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12">
+        We're technomancers—blending artificial intelligence with useful technology to create curious tools that empower the adventurous. 
+        Our mission: transmute intelligent, transparent, and powerful platforms that put you in control.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+        <!-- Feature 1: AI-Powered -->
+        <div class="glass rounded-xl p-8 text-center hover:border-neon-green/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-4">
+            <svg class="w-16 h-16 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 text-neon-green">AI-Powered</h3>
+          <p class="text-gray-400">
+            Leveraging cutting-edge machine learning and LLMs to provide intelligent insights and automated decision-making.
+          </p>
+        </div>
+        
+        <!-- Feature 2: Built for Adventurers -->
+        <div class="glass rounded-xl p-8 text-center hover:border-neon-purple/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-4">
+            <svg class="w-16 h-16 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 text-neon-purple">Built for Adventurers</h3>
+          <p class="text-gray-400">
+            Designed for those who aren't afraid to explore new unknowns and push boundaries in their every day lives.
+          </p>
+        </div>
+        
+        <!-- Feature 3: Open Source -->
+        <div class="glass rounded-xl p-8 text-center hover:border-neon-cyan/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-4">
+            <svg class="w-16 h-16 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 text-neon-cyan">Open Source</h3>
+          <p class="text-gray-400">
+            Transparency is our foundation. All our projects are open-source, allowing you to audit, modify, and contribute.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-20 bg-dark-bg">
+    <div class="container mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-6 glow-green">Our Products</h2>
+      <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-16">
+        Innovative AI-powered tools built with modern technology.
+      </p>
+      
+      <div class="max-w-4xl mx-auto">
+        <!-- Permafrost -->
+        <ProductCard
+          title="Permafrost"
+          description="Professional-grade AI-powered cryptocurrency grid trading bot. Automate your trading strategy with real-time monitoring, advanced analytics, and risk-free sandbox testing."
+          status="In Development"
+          techStack={['Python', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 'InfluxDB', 'Docker']}
+          icon="❄️"
+        >
+          <div class="mt-4 space-y-2">
+            <h4 class="text-lg font-semibold text-neon-cyan">Key Features:</h4>
+            <ul class="text-sm text-gray-400 space-y-1 list-disc list-inside">
+              <li>Automated grid trading across multiple crypto pairs</li>
+              <li>AI-assisted market analysis and strategy recommendations</li>
+              <li>Real-time monitoring with Grafana dashboards</li>
+              <li>Sandbox mode for risk-free strategy testing</li>
+              <li>Multi-exchange support (Coinbase, Binance, more coming)</li>
+            </ul>
+            <p class="text-sm text-gray-500 mt-4 italic">
+              * Permafrost repository is currently private. Invitation-only access during development.
+            </p>
+          </div>
+        </ProductCard>
+        
+        <div class="mt-12 text-center">
+          <p class="text-gray-500">
+            More products in development. Visit our <a href="https://github.com/highball-technomancy" class="text-neon-purple hover:underline" target="_blank" rel="noopener noreferrer">GitHub organization</a> for updates on open-source projects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Section -->
+  <section id="technology" class="py-20 bg-dark-blue">
+    <div class="container mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-6 glow-cyan">How We Build</h2>
+      <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-16">
+        Production-grade tech stack. Modern, robust, and battle-tested.
+      </p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <!-- Python -->
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-green/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z" fill="#00c853"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-green">Python</h4>
+          <p class="text-xs text-gray-500 mt-1">Backend & AI</p>
+        </div>
+        
+        <!-- React -->
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-cyan/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.533-.66-.915-1.345-1.727-2.035-2.417 1.507-1.376 2.93-2.323 3.97-2.323h.134zm-9.6.05c1.034 0 2.457.96 3.97 2.33-.687.692-1.375 1.508-2.034 2.41-1.1.118-2.143.3-3.106.533-.11-.498-.195-.988-.254-1.45-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.558-.127.08 0 .15.006.152.012zm4.48 5.59c.42.07.832.153 1.234.247l.01.025-.093-.03v.005c-.302.066-.608.132-.92.202h.002l-.278.053-.018.003c-.41.07-.823.14-1.235.225.177-.303.356-.613.538-.93.18-.315.362-.632.56-.94zm-.927-2.207l.006.004c-.342-.565-.685-1.096-1.03-1.595-.345-.5-.693-.967-1.044-1.406l.01-.014.05.01c.195.02.39.046.588.073l.14.023c1.043.142 1.98.353 2.78.625l-.5 1.39v.89zm-7.05.725c.23-.074.46-.14.695-.203h.03c.23-.058.463-.11.698-.16l.002-.006c.202-.033.408-.064.613-.09.04-.006.08-.01.123-.014l.078-.01c.138-.016.28-.032.423-.043-.18.3-.357.608-.527.924l-.005-.005c-.095.173-.19.35-.283.526-.168.328-.333.66-.495.998-.65-.23-1.253-.49-1.804-.787a11.354 11.354 0 0 1-.548-.27.006.006 0 0 0-.002-.01zM8.3 1.388C8 1.38 7.7 1.413 7.4 1.49a.59.59 0 0 0-.413.258c-.22.337-.22.902 0 1.652.173.607.485 1.316.926 2.105-.635.177-1.225.383-1.755.617a10.63 10.63 0 0 0-.56.253c-.7.347-1.326.74-1.855 1.177a5.77 5.77 0 0 0-.4.365c-.374.382-.6.755-.717 1.097-.142.432-.142.858 0 1.292.12.37.36.768.743 1.173l.41.413c.522.45 1.14.85 1.827 1.197.19.1.4.195.61.286.542.234 1.133.44 1.77.617-.445.79-.757 1.497-.933 2.104-.218.747-.218 1.31 0 1.647.14.214.343.375.586.465.323.12.7.135 1.1.04a6.34 6.34 0 0 0 1.364-.45c.714-.326 1.522-.81 2.397-1.442.87.63 1.677 1.113 2.387 1.437.55.253 1.053.406 1.495.455.336.04.668.017.965-.067.258-.076.48-.224.644-.43.218-.333.218-.893 0-1.64-.174-.608-.485-1.317-.93-2.107.64-.177 1.23-.383 1.76-.617.19-.09.38-.18.567-.28.694-.35 1.322-.746 1.857-1.188.143-.116.283-.236.413-.364.375-.383.6-.757.717-1.098.142-.432.142-.858 0-1.29-.12-.37-.36-.768-.743-1.173-.133-.145-.28-.283-.42-.413-.52-.45-1.137-.85-1.823-1.197-.19-.1-.4-.195-.61-.286-.538-.234-1.128-.44-1.768-.617.445-.79.757-1.497.93-2.104.218-.746.218-1.31 0-1.647-.14-.214-.343-.375-.586-.465a2.065 2.065 0 0 0-.56-.09h-.24z" fill="#00e5ff"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-cyan">React</h4>
+          <p class="text-xs text-gray-500 mt-1">Frontend</p>
+        </div>
+        
+        <!-- PostgreSQL -->
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-purple/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2661-.1039.0147-.1993.0306-.2956.0465a.0408.0408 0 0 1-.0239-.0013.0426.0426 0 0 1-.0123-.0329c.2341-.5758.4611-1.1649.5308-1.7428.0934-.7734-.0382-1.3468-.3924-1.7058-.3145-.3189-.7628-.4575-1.3246-.4121-.8734.0706-1.8527.5235-2.7677 1.2773-.9155.7539-1.7387 1.7844-2.3294 2.9166-.496.951-.815 1.9846-.9472 3.0726a6.3748 6.3748 0 0 1-.1784.823 5.9969 5.9969 0 0 1-.3584.9295c-.1814.3443-.4105.6714-.6807 1.0104-.5397.6761-1.2233 1.2949-1.9721 1.7863-.7488.4908-1.5641.8565-2.3533 1.0538-.7892.1968-1.5537.2254-2.2088.0891-.6554-.1358-1.2014-.4315-1.5925-.8824-.3907-.4508-.6209-1.0513-.6711-1.7807a5.0892 5.0892 0 0 1 .0672-1.5095c.0938-.5034.2517-1.0077.4598-1.5049.208-.497.4662-.9903.7653-1.4787.2986-.4884.6372-.9729 1.0121-1.4493.375-.4769.7868-.9472 1.2344-1.4056.4476-.4585.9321-.9064 1.449-1.3427.5169-.4362 1.0662-.8619 1.6436-1.2707.5771-.4084 1.1822-.799 1.8098-1.1661.6275-.3671 1.2775-.7115 1.9434-1.0283a20.2432 20.2432 0 0 1 2.0627-.8475 19.7957 19.7957 0 0 1 2.1396-.5643c.7209-.1491 1.4301-.2358 2.1242-.2579.694-.0221 1.3719.0072 2.0305.0878.6586.0806 1.2971.2115 1.9068.3911.6097.1796 1.1905.4071 1.7342.6797.5437.2727 1.0499.589 1.5116.945a6.1948 6.1948 0 0 1 1.1852 1.254 5.2567 5.2567 0 0 1 .7547 1.5233c.1673.556.2282 1.1459.1762 1.7653-.0512.619-.2182 1.2677-.5097 1.9338-.2911.6661-.7061 1.348-1.2402 2.042-.5336.6939-1.1859 1.3987-1.9531 2.1074-.7672.7087-1.6492 1.4218-2.6394 2.1319a28.8678 28.8678 0 0 1-3.5483 2.3627c-1.2847.7259-2.6682 1.4088-4.1302 2.0286a43.0465 43.0465 0 0 1-4.6944 1.703c-1.6203.4847-3.3182.8929-5.0765 1.2142a58.6914 58.6914 0 0 1-5.4896.6862c-1.8552.1299-3.7435.1664-5.6474.1028-1.9039-.0636-3.8235-.2242-5.7452-.4845-1.9217-.2608-3.8457-.6217-5.7544-1.0896-1.9087-.4675-3.802-1.0424-5.6629-1.7164a46.9653 46.9653 0 0 1-5.4673-2.3828 40.9156 40.9156 0 0 1-5.0803-3.0211 32.7826 32.7826 0 0 1-4.4944-3.6182c-1.3581-1.3118-2.5384-2.6906-3.5206-4.1152a24.5362 24.5362 0 0 1-2.6529-4.5051 18.9718 18.9718 0 0 1-1.4838-4.7622 15.6087 15.6087 0 0 1-.1301-4.8379 13.7021 13.7021 0 0 1 1.3487-4.6943 12.6374 12.6374 0 0 1 2.7924-3.8714 11.8557 11.8557 0 0 1 3.9179-2.6229 11.2985 11.2985 0 0 1 4.6758-.7851c1.6087.1018 3.1541.4844 4.6253.1142a8.5707 8.5707 0 0 0 2.0858-.8018 7.3944 7.3944 0 0 0 1.7673-1.3264 6.5943 6.5943 0 0 0 1.2604-1.7552 6.0562 6.0562 0 0 0 .5908-2.0845 5.7067 5.7067 0 0 0-.2114-2.1929 5.5513 5.5513 0 0 0-1.0672-1.9653 5.5154 5.5154 0 0 0-1.7428-1.4327 5.5794 5.5794 0 0 0-2.1891-.6076 5.7025 5.7025 0 0 0-2.2624.256 5.8677 5.8677 0 0 0-1.9872 1.0477 6.0816 6.0816 0 0 0-1.5036 1.6705 6.3584 6.3584 0 0 0-.8721 2.1008 6.6741 6.6741 0 0 0-.1554 2.3065c.1063.7769.3364 1.5265.6683 2.2381.3319.7116.7644 1.3853 1.2858 2.0081.5213.6229 1.1314 1.1939 1.8149 1.6991a11.6263 11.6263 0 0 0 2.3695 1.253 14.3606 14.3606 0 0 0 2.6968.6813 18.148 18.148 0 0 0 2.8433.1842c.9472-.0282 1.8763-.1433 2.7797-.344.9034-.2008 1.7809-.4859 2.6231-.8533.8422-.3674 1.6489-.8167 2.412-1.3465.7631-.5298 1.4823-1.1401 2.1486-1.8275.6662-.6874 1.2794-1.4518 1.8303-2.2883a19.2826 19.2826 0 0 0 1.4625-2.6992 21.5644 21.5644 0 0 0 1.0208-2.9904c.2637-.9996.4507-2.0302.5566-3.0811.1059-1.0508.1308-2.1219.0708-3.2063-.0601-1.0844-.2214-2.1819-.4909-3.2819-.2694-1.1-.6471-2.2021-1.1362-3.2954a28.3214 28.3214 0 0 0-1.7377-3.2485 31.7698 31.7698 0 0 0-2.2965-3.1086 34.4237 34.4237 0 0 0-2.7787-2.8761 36.3165 36.3165 0 0 0-3.1745-2.5541 37.4057 37.4057 0 0 0-3.4818-2.1569 38.0124 38.0124 0 0 0-3.6903-1.7134 38.5246 38.5246 0 0 0-3.8018-1.2549 38.7558 38.7558 0 0 0-3.8237-.8025 38.9867 38.9867 0 0 0-3.8457-.3648c-1.2729-.0282-2.5457-.0117-3.8185.0447-1.2728.0565-2.5457.1575-3.8185.303-1.2729.1455-2.5457.3355-3.8185.5702-1.2729.2346-2.5457.5139-3.8185.8377a50.0747 50.0747 0 0 0-3.8185 1.1046 53.2573 53.2573 0 0 0-3.7286 1.3608c-1.2287.5057-2.4301 1.0565-3.6041 1.6524-1.174.5959-2.3207 1.2368-3.4399 1.9227-1.1192.686-2.2109 1.417-3.2751 2.193-1.0642.776-2.1009 1.5971-3.1101 2.4634-1.0092.8662-1.991 1.7775-2.9454 2.7336-.9544.9562-1.8813 1.9575-2.7809 3.0031-.8996 1.0457-1.7718 2.1358-2.6168 3.2698a45.9357 45.9357 0 0 0-2.3522 3.4833c-.7364 1.1958-1.4276 2.4249-2.0728 3.6868-.6451 1.2619-1.245 2.5566-1.7995 3.8836a62.8267 62.8267 0 0 0-1.4555 4.0931c-.4279 1.3886-.8106 2.7993-1.1478 4.231-.3372 1.4317-.6287 2.8845-.8747 4.3577-.246 1.4732-.4463 2.9668-.6009 4.4798-.1546 1.513-.2636 3.0453-.3268 4.5962-.0632 1.5509-.0807 3.1202-.0524 4.7065.0283 1.5863.1014 3.1895.2193 4.8085.1179 1.6189.2806 3.2534.4879 4.9019.2073 1.6485.4593 3.3106.7554 4.9847.2961 1.6741.6363 3.3598 1.0202 5.0548.3839 1.695.8115 3.3987 1.2822 5.1088.4708 1.7101.9847 3.4261 1.5414 5.1452.5567 1.7191 1.1561 3.4407 1.7976 5.1612a84.0813 84.0813 0 0 0 2.0954 5.0723 91.8264 91.8264 0 0 0 2.3915 4.9679 97.0406 97.0406 0 0 0 2.6833 4.8406c.9317 1.5808 1.9073 3.1326 2.925 4.6505a109.0953 109.0953 0 0 0 3.1575 4.4433 113.5608 113.5608 0 0 0 3.3797 4.2182c1.1623 1.3798 2.356 2.7245 3.5808 4.0319 1.2248 1.3075 2.4803 2.5767 3.7649 3.806 1.2846 1.2293 2.5981 2.4183 3.939 3.5651 1.3409 1.1468 2.7086 2.2514 4.1018 3.3113 1.3932 1.0599 2.8115 2.0748 4.254 3.0423 1.4425.9675 2.9088 1.8871 4.3976 2.7565 1.4888.8694 3.0001 1.6881 4.5323 2.4535 1.5322.7654 3.0851 1.4775 4.6574 2.1339 1.5723.6564 3.163 1.2571 4.7707 1.7997 1.6077.5426 3.2322 1.0271 4.872 1.4513 1.6398.4242 3.2946.7879 4.9633 1.0892 1.6687.3013 3.3509.5401 5.0452.7145 1.6943.1744 3.4004.2845 5.1171.3287 1.7167.0442 3.4435.0225 5.1786-.0673 1.735-.0898 3.4781-.2518 5.2268-.4862 1.7487-.2344 3.5026-.541 5.2594-.9223a85.4399 85.4399 0 0 0 5.2929-1.3439c1.7579-.5266 3.4994-1.1195 5.2217-1.7808a75.0708 75.0708 0 0 0 5.0854-2.1991 67.4543 67.4543 0 0 0 4.8849-2.6177 60.9737 60.9737 0 0 0 4.6196-2.9993 55.5849 55.5849 0 0 0 4.2865-3.3417 51.3153 51.3153 0 0 0 3.8836-3.6397 47.7899 47.7899 0 0 0 3.4071-3.8877 45.1016 45.1016 0 0 0 2.8621-4.0805 42.9181 42.9181 0 0 0 2.2527-4.2128 41.3463 41.3463 0 0 0 1.5859-4.2779c.3949-1.4318.7208-2.8893.9762-4.3658.2554-1.4765.4405-2.9712.5549-4.4772.1144-1.5061.1582-3.0227.1317-4.5425-.0265-1.5198-.1234-3.0421-.2901-4.5596-.1667-1.5175-.4033-3.0296-.7089-4.5288-.3056-1.4992-.6804-2.9848-1.1235-4.4494a47.6653 47.6653 0 0 0-1.5279-4.3258 45.7828 45.7828 0 0 0-1.9119-4.1238 44.6772 44.6772 0 0 0-2.2663-3.8588 44.5244 44.5244 0 0 0-2.5916-3.5365 45.3603 45.3603 0 0 0-2.8874-3.1601 46.9887 46.9887 0 0 0-3.1533-2.7337 49.3099 49.3099 0 0 0-3.3884-2.2604 52.2236 52.2236 0 0 0-3.5924-1.7441 55.6242 55.6242 0 0 0-3.7648-1.1897 59.3194 59.3194 0 0 0-3.9056-.6026 63.2004 63.2004 0 0 0-4.0154-.0053 67.0704 67.0704 0 0 0-4.0943.5957 70.7353 70.7353 0 0 0-4.1432 1.1838 74.1883 74.1883 0 0 0-4.1631 1.7579 77.3282 77.3282 0 0 0-4.1548 2.3161 80.0492 80.0492 0 0 0-4.1185 2.8568 82.3491 82.3491 0 0 0-4.054 3.3781 84.2264 84.2264 0 0 0-3.9612 3.8798 85.6804 85.6804 0 0 0-3.8405 4.3608 86.7127 86.7127 0 0 0-3.6927 4.8209 87.4259 87.4259 0 0 0-3.5187 5.2594 87.7229 87.7229 0 0 0-3.3191 5.6759 87.6069 87.6069 0 0 0-3.0949 6.0708 87.1788 87.1788 0 0 0-2.8471 6.4437 86.4413 86.4413 0 0 0-2.577 6.7952 85.4005 85.4005 0 0 0-2.2856 7.1253 84.0654 84.0654 0 0 0-1.974 7.4341 82.4449 82.4449 0 0 0-1.6431 7.7217 80.5591 80.5591 0 0 0-1.2943 7.9882 78.4293 78.4293 0 0 0-.9291 8.2339 76.0759 76.0759 0 0 0-.5487 8.459 73.5212 73.5212 0 0 0-.1541 8.6631 70.7884 70.7884 0 0 0 .254 8.846 67.8966 67.8966 0 0 0 .6755 9.008 64.8763 64.8763 0 0 0 1.1102 9.1483 61.7494 61.7494 0 0 0 1.5574 9.267 58.5368 58.5368 0 0 0 2.0173 9.3644 55.2607 55.2607 0 0 0 2.4894 9.4401 51.9426 51.9426 0 0 0 2.9735 9.4942 48.6029 48.6029 0 0 0 3.4688 9.5262 45.2618 45.2618 0 0 0 3.9753 9.5361 41.9389 41.9389 0 0 0 4.4921 9.5241 38.6537 38.6537 0 0 0 5.0184 9.4897 35.4244 35.4244 0 0 0 5.5534 9.4331 32.2689 32.2689 0 0 0 6.0956 9.3544 29.201 29.201 0 0 0 6.644 9.2534 26.2363 26.2363 0 0 0 7.1972 9.1304 23.3884 23.3884 0 0 0 7.753 8.9853 20.6696 20.6696 0 0 0 8.3103 8.8182 18.0909 18.0909 0 0 0 8.8677 8.629 15.6622 15.6622 0 0 0 9.4232 8.418 13.394 13.394 0 0 0 9.9745 8.1851 11.2954 11.2954 0 0 0 10.5193 7.9304 9.37504 9.37504 0 0 0 11.0554 7.6541 7.6401 7.6401 0 0 0 11.5804 7.3564 6.0856 6.0856 0 0 0 12.0918 7.0375 4.7136 4.7136 0 0 0 12.5872 6.6978 3.5212 3.5212 0 0 0 13.0638 6.338 2.50631 2.50631 0 0 0 13.5189 5.9586 1.6621 1.6621 0 0 0 13.9494 5.5602.9836.9836 0 0 0 14.3521 5.1436.4682.4682 0 0 0 14.7234 4.7098.1143.1143 0 0 0 14.9571 4.2775z" fill="#a855f7"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-purple">PostgreSQL</h4>
+          <p class="text-xs text-gray-500 mt-1">Database</p>
+        </div>
+        
+        <!-- Docker -->
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-orange/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887a.186.186 0 00.186.186m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z" fill="#ff9800"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-orange">Docker</h4>
+          <p class="text-xs text-gray-500 mt-1">Infrastructure</p>
+        </div>
+        
+        <!-- Additional technologies -->
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-green/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12 text-neon-green" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-green">Claude AI</h4>
+          <p class="text-xs text-gray-500 mt-1">AI Integration</p>
+        </div>
+        
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-cyan/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12 text-neon-cyan" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-cyan">Grafana</h4>
+          <p class="text-xs text-gray-500 mt-1">Monitoring</p>
+        </div>
+        
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-purple/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12 text-neon-purple" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M13 13v8h8v-8h-8zM3 21h8v-8H3v8zM3 3v8h8V3H3zm13.66-1.31L11 7.34 16.66 13l5.66-5.66-5.66-5.65z"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-purple">FastAPI</h4>
+          <p class="text-xs text-gray-500 mt-1">API Framework</p>
+        </div>
+        
+        <div class="glass rounded-xl p-6 text-center hover:border-neon-orange/50 border border-white/10 transition-all">
+          <div class="flex justify-center mb-3">
+            <svg class="w-12 h-12 text-neon-orange" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <h4 class="font-semibold text-neon-orange">Redis</h4>
+          <p class="text-xs text-gray-500 mt-1">Caching</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQ />
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-dark-bg">
+    <div class="container mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-6 glow-green">Get In Touch</h2>
+      <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-16">
+        Interested in collaborating or have questions about our projects? We'd love to hear from you.
+      </p>
+      
+      <div class="max-w-4xl mx-auto">
+        <!-- Founder Info Card -->
+        <div class="glass rounded-xl p-8 border border-neon-green/20 mb-12">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+            <div class="flex-1 text-center md:text-left">
+              <h3 class="text-2xl font-bold text-white mb-2">Patrick Hill</h3>
+              <p class="text-neon-cyan text-lg mb-6">Founder</p>
+              
+              <div class="space-y-4">
+                <!-- Email -->
+                <a 
+                  href="mailto:pahill@technomancyai.com"
+                  class="flex items-center justify-center md:justify-start space-x-3 text-gray-300 hover:text-neon-green transition-colors group"
+                >
+                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                  <span>pahill@technomancyai.com</span>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a 
+                  href="https://www.linkedin.com/in/patrickalanhill/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-center md:justify-start space-x-3 text-gray-300 hover:text-neon-cyan transition-colors group"
+                >
+                  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- GitHub CTA -->
+        <div class="text-center">
+          <p class="text-gray-400 mb-6">Explore our open-source projects</p>
+          <a 
+            href="https://github.com/highball-technomancy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-2 px-8 py-4 bg-dark-panel border-2 border-neon-green text-neon-green font-bold rounded-full hover:bg-neon-green hover:text-dark-bg transition-all glow-box-green text-lg"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <Footer />
+</Layout>

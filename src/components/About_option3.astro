@@ -1,0 +1,61 @@
+<!-- About Section with HTbg.png background - Add this to index.astro -->
+<section id="about" class="py-20 relative overflow-hidden">
+  <!-- HTbg.png background -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/HTbg.png" 
+      alt="Background" 
+      class="w-full h-full object-cover opacity-20"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-bg-alt via-dark-bg-alt/95 to-dark-bg-alt"></div>
+  </div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <h2 class="text-5xl font-bold text-center mb-6 glow-purple">What is Highball Technomancy?</h2>
+    <p class="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-12">
+      We're technomancers—blending artificial intelligence with financial technology to create tools that empower the adventurous. 
+      Our mission: build intelligent, transparent, and powerful platforms that put you in control.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      <!-- Feature 1: AI-Powered -->
+      <div class="glass rounded-xl p-8 text-center hover:border-neon-green/50 border border-white/10 transition-all">
+        <div class="flex justify-center mb-4">
+          <svg class="w-16 h-16 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-3 text-neon-green">AI-Powered</h3>
+        <p class="text-gray-400">
+          Leveraging cutting-edge machine learning and LLMs to provide intelligent market insights and automated decision-making.
+        </p>
+      </div>
+      
+      <!-- Feature 2: Built for Adventurers -->
+      <div class="glass rounded-xl p-8 text-center hover:border-neon-purple/50 border border-white/10 transition-all">
+        <div class="flex justify-center mb-4">
+          <svg class="w-16 h-16 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-3 text-neon-purple">Built for Adventurers</h3>
+        <p class="text-gray-400">
+          Designed for those who aren't afraid to explore new technologies and push boundaries in their trading strategies.
+        </p>
+      </div>
+      
+      <!-- Feature 3: Open Source -->
+      <div class="glass rounded-xl p-8 text-center hover:border-neon-cyan/50 border border-white/10 transition-all">
+        <div class="flex justify-center mb-4">
+          <svg class="w-16 h-16 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-3 text-neon-cyan">Open Source</h3>
+        <p class="text-gray-400">
+          Transparency is our foundation. All our projects are open-source, allowing you to audit, modify, and contribute.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

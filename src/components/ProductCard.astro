@@ -1,0 +1,114 @@
+---
+// ProductCard.astro
+interface Props {
+  title: string;
+  description: string;
+  status: 'In Development' | 'Beta' | 'Live' | 'Coming Soon';
+  techStack?: string[];
+  githubUrl?: string;
+  docsUrl?: string;
+  demoUrl?: string;
+  icon?: string;
+}
+
+const { title, description, status, techStack, githubUrl, docsUrl, demoUrl, icon } = Astro.props;
+
+const statusColors = {
+  'In Development': 'border-neon-orange text-neon-orange',
+  'Beta': 'border-neon-cyan text-neon-cyan',
+  'Live': 'border-neon-green text-neon-green',
+  'Coming Soon': 'border-neon-purple text-neon-purple'
+};
+---
+
+<div class="product-card glass rounded-xl p-8 border border-white/10 hover:border-neon-green/50 transition-all glow-box-green">
+  <!-- Status badge -->
+  <div class="flex items-center justify-between mb-4">
+    <span class={`text-sm px-4 py-1 rounded-full border ${statusColors[status]}`}>
+      {status}
+    </span>
+    {icon && (
+      <span class="text-4xl">{icon}</span>
+    )}
+  </div>
+  
+  <!-- Title -->
+  <h3 class="text-3xl font-bold mb-4 glow-green">
+    {title}
+  </h3>
+  
+  <!-- Description -->
+  <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+    {description}
+  </p>
+  
+  <!-- Tech stack -->
+  {techStack && techStack.length > 0 && (
+    <div class="mb-6">
+      <p class="text-sm text-gray-400 mb-2">Built with:</p>
+      <div class="flex flex-wrap gap-2">
+        {techStack.map(tech => (
+          <span class="text-xs px-3 py-1 bg-dark-panel rounded-full text-neon-cyan border border-neon-cyan/30">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  <!-- Links -->
+  <div class="flex flex-wrap gap-3">
+    {githubUrl && (
+      <a 
+        href={githubUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="px-6 py-2 bg-neon-green/10 border border-neon-green text-neon-green rounded-full hover:bg-neon-green hover:text-dark-bg transition-all text-sm font-semibold"
+      >
+        GitHub
+      </a>
+    )}
+    {docsUrl && (
+      <a 
+        href={docsUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="px-6 py-2 bg-neon-cyan/10 border border-neon-cyan text-neon-cyan rounded-full hover:bg-neon-cyan hover:text-dark-bg transition-all text-sm font-semibold"
+      >
+        Docs
+      </a>
+    )}
+    {demoUrl && (
+      <a 
+        href={demoUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="px-6 py-2 bg-neon-purple/10 border border-neon-purple text-neon-purple rounded-full hover:bg-neon-purple hover:text-dark-bg transition-all text-sm font-semibold"
+      >
+        Demo
+      </a>
+    )}
+  </div>
+  
+  <!-- Slot for additional content -->
+  <div class="mt-6">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .product-card {
+    animation: fadeIn 0.8s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

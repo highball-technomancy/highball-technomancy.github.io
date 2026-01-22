@@ -1,0 +1,143 @@
+---
+// Hero.astro - With HTbg.png as background
+import Logo from './Logo.astro';
+---
+
+<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+  <!-- HTbg.png background with overlay -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/HTbg.png" 
+      alt="Background" 
+      class="w-full h-full object-cover opacity-30"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-bg/80 via-dark-bg/60 to-dark-bg"></div>
+  </div>
+  
+  <!-- Subtle particle overlay (minimal) -->
+  <canvas id="particle-canvas" class="absolute inset-0 z-10"></canvas>
+  
+  <div class="container mx-auto px-6 text-center z-20 relative">
+    <!-- Logo -->
+    <div class="flex justify-center mb-8 fade-in">
+      <Logo size="200" />
+    </div>
+    
+    <!-- Main headline -->
+    <h1 class="text-5xl md:text-6xl font-bold mb-4 fade-in text-white">
+      AI-Powered Trading Tools<br/>for the Adventurous
+    </h1>
+    
+    <!-- Tagline -->
+    <p class="text-xl md:text-2xl text-gray-400 mb-12 fade-in">
+      Binary Spirits, Digital Alchemy
+    </p>
+    
+    <!-- Single primary CTA -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in">
+      <a 
+        href="#products" 
+        class="px-10 py-4 bg-neon-green text-dark-bg font-bold rounded-full hover:bg-neon-green/90 transition-all glow-box-green text-lg"
+      >
+        View Permafrost →
+      </a>
+      <a 
+        href="#about" 
+        class="text-gray-400 hover:text-neon-green transition-colors text-lg"
+      >
+        Learn about Highball Technomancy
+      </a>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="mt-20 flex justify-center">
+      <a href="#about" class="animate-bounce">
+        <svg class="w-6 h-6 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Minimal particle overlay (10 particles, very subtle)
+  const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+  
+  if (canvas && ctx) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    interface Particle {
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+      color: string;
+    }
+    
+    const particles: Particle[] = [];
+    const particleCount = 10;
+    const colors = ['#00c853', '#a855f7', '#00e5ff'];
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.15 + 0.05,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+    
+    function animate() {
+      if (!ctx || !canvas) return;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((particle, index) => {
+        ctx.globalAlpha = particle.opacity;
+        ctx.fillStyle = particle.color;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+        
+        particles.slice(index + 1).forEach(otherParticle => {
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 200) {
+            ctx.globalAlpha = (1 - distance / 200) * 0.1;
+            ctx.strokeStyle = particle.color;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.stroke();
+          }
+        });
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+</script>

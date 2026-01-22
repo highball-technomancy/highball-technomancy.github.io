@@ -1,0 +1,63 @@
+---
+// Logo.astro - Real logo with bigger size and green HIGHBALL
+const { class: className = "", size = "auto" } = Astro.props;
+
+// Calculate height based on size prop - BIGGER NOW
+const height = size === "auto" ? "80px" : `${parseInt(size) / 2.5}px`;
+---
+
+<div class={`logo-container ${className}`}>
+  <img 
+    src="/logo.png" 
+    alt="Highball Technomancy Logo"
+    style={`height: ${height};`}
+    class="logo-image"
+  />
+  <div class="logo-text">
+    <span class="logo-brand">HIGHBALL</span>
+    <span class="logo-sub">TECHNOMANCY</span>
+  </div>
+</div>
+
+<style>
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-image {
+    width: auto;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  
+  .logo-brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00c853; /* Solid green instead of gradient */
+  }
+  
+  .logo-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: #ffffff;
+    opacity: 0.9;
+  }
+  
+  .logo-container:hover .logo-image {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+  }
+  
+  .logo-container:hover .logo-brand {
+    filter: brightness(1.2);
+  }
+</style>
