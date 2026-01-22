@@ -1,0 +1,44 @@
+---
+// Giscus.astro - Comment section powered by GitHub Discussions
+---
+
+<section id="feedback" class="py-20 bg-dark-bg-alt">
+  <div class="container mx-auto px-6">
+    <h2 class="text-5xl font-bold text-center mb-6 glow-green">Community Feedback</h2>
+    <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-12">
+      Share your thoughts, ask questions, or just say hi! Comments are powered by GitHub Discussions.
+    </p>
+    
+    <div class="max-w-4xl mx-auto glass rounded-xl p-8 border border-white/10">
+      <!-- Giscus Comments -->
+      <script 
+        src="https://giscus.app/client.js"
+        data-repo="highball-technomancy/highball-technomancy.github.io"
+        data-repo-id="YOUR_REPO_ID"
+        data-category="General"
+        data-category-id="YOUR_CATEGORY_ID"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Giscus theme customization */
+  :global(.giscus) {
+    width: 100%;
+  }
+  
+  :global(.giscus-frame) {
+    border: none !important;
+  }
+</style>
