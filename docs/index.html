@@ -1,1 +1,165 @@
-smeg
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Permafrost Grid Trader – Highball Technomancy</title>
+  <meta name="description" content="Permafrost is a professional-grade, AI-powered cryptocurrency grid trading bot with real-time monitoring and advanced analytics.">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #10131a;
+      color: #fff;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    header {
+      background: #191f2e;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      border-bottom: 2px solid #2e3752;
+    }
+    header h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2.5rem;
+      color: #66e0ff;
+      letter-spacing: 2px;
+    }
+    header p {
+      color: #b3cae0;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      max-width: 700px;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto 0 auto;
+      padding: 0 1rem;
+    }
+    section {
+      margin: 2.5rem 0;
+      background: #161b22;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(30,48,80,0.07);
+      padding: 2rem;
+    }
+    h2 {
+      color: #62b7f4;
+      margin-top: 0;
+      font-size: 1.6rem;
+      letter-spacing: 1.2px;
+    }
+    ul, li {
+      color: #e6f1ff;
+      font-size: 1.08rem;
+    }
+    .features-list li {
+      margin-bottom: 0.6em;
+    }
+    .disclaimer {
+      background: #212636;
+      color: #ffb84d;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-left: 5px solid #f7c873;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .tech-info, .links {
+      font-size: 1.02rem;
+      color: #a8d1e7;
+    }
+    .cta {
+      display: inline-block;
+      background: linear-gradient(90deg,#44daec,#62b7f4 85%);
+      color: #102030;
+      padding: 0.85em 1.8em;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1.12rem;
+      margin-top: 2rem;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(100,220,255,0.12);
+      transition: background 0.35s;
+    }
+    .cta:hover {
+      background: linear-gradient(90deg,#62b7f4,#44daec 85%);
+      color: #173050;
+    }
+    .footer {
+      text-align: center;
+      color: #8fa7c8;
+      font-size: 0.99rem;
+      padding: 2rem 1rem 1rem 1rem;
+    }
+    @media (max-width:600px) {
+      main, section { padding: 1rem; }
+      header { padding: 1.2rem 0 0.7rem 0;}
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Permafrost Grid Trader</h1>
+    <p>AI-powered, professional-grade cryptocurrency grid trading bot.<br>
+      Automated trading, real-time analytics, and robust market insights – all in one open source platform.</p>
+  </header>
+  <main>
+    <section>
+      <h2>What is Permafrost?</h2>
+      <p>
+        Permafrost is a next-generation cryptocurrency grid trading bot, designed for traders who demand automation, transparency, and innovative features.
+        <br><br>
+        With an AI-assisted strategy core and a modern, real-time dashboard, Permafrost empowers users to run complex, multi-market grid trading with deep observability and risk control.
+      </p>
+    </section>
+
+    <section>
+      <h2>Core Features</h2>
+      <ul class="features-list">
+        <li><b>Grid Trading Automation</b> – Buy low, sell high at predefined levels across multiple pairs, 24/7.</li>
+        <li><b>AI-Powered Analysis</b> – Get smart market insights and strategy recommendations informed by advanced machine learning.</li>
+        <li><b>Real-Time Monitoring</b> – Lightning-fast updates with full observability through Grafana, InfluxDB, and live charts.</li>
+        <li><b>Risk-Free Paper Trading</b> – Sandbox mode lets you develop and test strategies with zero capital at risk.</li>
+        <li><b>Advanced API & Modular Design</b> – FastAPI backend, React UI, robust API, and Dockerized deployments for easy extension.</li>
+        <li><b>Multi-Exchange Support</b> – Compatible with industry-leading crypto exchanges (e.g. Coinbase, OKX).</li>
+        <li><b>Open Source</b> – MIT-licensed and transparent. Visit GitHub for code and contributions.</li>
+      </ul>
+      <a class="cta" href="https://github.com/highball-technomancy/Permafrost" target="_blank" rel="noopener">View Project on GitHub</a>
+    </section>
+
+    <section>
+      <h2>Technology Stack</h2>
+      <ul class="tech-info">
+        <li>Backend: Python 3.11, FastAPI, SQLAlchemy, Redis, InfluxDB, CCXT, Pandas/NumPy/Scikit-learn</li>
+        <li>Frontend: React (TypeScript), Lightweight-Charts, WebSockets</li>
+        <li>Infrastructure: Docker Compose, PostgreSQL 16, Grafana</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Get Started</h2>
+      <ol class="links">
+        <li>
+          <a href="https://github.com/highball-technomancy/Permafrost#quick-start" target="_blank" rel="noopener" style="color:#64f4ab">Quick Start Guide</a>
+        </li>
+        <li>
+          <a href="https://github.com/highball-technomancy/Permafrost#project-structure" target="_blank" rel="noopener" style="color:#a2e9f7">Project Structure & Docs</a>
+        </li>
+      </ol>
+      <p><a class="cta" href="https://github.com/highball-technomancy/Permafrost" target="_blank" rel="noopener">Try Permafrost Now</a></p>
+    </section>
+
+    <section class="disclaimer">
+      <b>Disclaimer:</b> Cryptocurrency trading carries significant risk. Permafrost is provided "as-is" with no warranty. Always start in sandbox mode and never trade more than you can afford to lose.
+    </section>
+  </main>
+  <div class="footer">
+    Made with ❄️ by the Highball Technomancy team • <a href="https://github.com/highball-technomancy/Permafrost" target="_blank" rel="noopener" style="color:#67b5f0;">GitHub Project</a>
+  </div>
+</body>
+</html>
