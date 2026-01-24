@@ -9,9 +9,10 @@ interface Props {
   docsUrl?: string;
   demoUrl?: string;
   icon?: string;
+  iconImage?: string;
 }
 
-const { title, description, status, techStack, githubUrl, docsUrl, demoUrl, icon } = Astro.props;
+const { title, description, status, techStack, githubUrl, docsUrl, demoUrl, icon, iconImage } = Astro.props;
 
 const statusColors = {
   'In Development': 'border-neon-orange text-neon-orange',
@@ -27,7 +28,10 @@ const statusColors = {
     <span class={`text-sm px-4 py-1 rounded-full border ${statusColors[status]}`}>
       {status}
     </span>
-    {icon && (
+    {iconImage && (
+      <img src={iconImage} alt={`${title} icon`} class="w-16 h-16 object-contain" />
+    )}
+    {!iconImage && icon && (
       <span class="text-4xl">{icon}</span>
     )}
   </div>
