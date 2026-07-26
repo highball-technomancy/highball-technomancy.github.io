@@ -34,6 +34,30 @@
                  0 0 30px rgba(0, 229, 255, 0.3);
   }
   
+  .glow-pink {
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.8),
+                 0 0 20px rgba(255, 20, 147, 0.5),
+                 0 0 30px rgba(255, 20, 147, 0.3);
+  }
+  
+  .glow-gold {
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.8),
+                 0 0 20px rgba(255, 193, 7, 0.5),
+                 0 0 30px rgba(255, 193, 7, 0.3);
+  }
+  
+  .glow-orange {
+    text-shadow: 0 0 10px rgba(255, 152, 0, 0.8),
+                 0 0 20px rgba(255, 152, 0, 0.5),
+                 0 0 30px rgba(255, 152, 0, 0.3);
+  }
+  
+  .glow-red {
+    text-shadow: 0 0 10px rgba(255, 23, 68, 0.8),
+                 0 0 20px rgba(255, 23, 68, 0.5),
+                 0 0 30px rgba(255, 23, 68, 0.3);
+  }
+  
   /* Box glow on hover */
   .glow-box-green {
     transition: all 0.3s ease;

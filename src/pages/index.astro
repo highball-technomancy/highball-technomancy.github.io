@@ -71,43 +71,80 @@ import Logo from '../components/Logo.astro';
     </div>
   </section>
 
-  <!-- Products Section -->
-  <section id="products" class="py-20 bg-dark-bg">
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 bg-dark-bg">
     <div class="container mx-auto px-6">
-      <h2 class="text-5xl font-bold text-center mb-6 glow-green">Our Products</h2>
+      <h2 class="text-5xl font-bold text-center mb-6 glow-green">On Tap</h2>
       <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-16">
-        Innovative AI-powered tools built with modern technology.
+        What we're building right now. Some of it is alive. The rest are design documents, strong opinions, and the scribblings of madmen. We think both options are worth showing you.
       </p>
       
-      <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         <!-- Permafrost -->
         <ProductCard
           title="Permafrost"
-          description="Professional-grade AI-powered cryptocurrency grid trading bot. Automate your trading strategy with real-time monitoring, advanced analytics, and risk-free sandbox testing."
-          status="In Development"
+          description="An on-chain DeFi grid trading system run by Frostbyte — an AI organism that reasons the way a brain does instead of the way a bot does. Where other machines just read the chart, Frostbyte reads the people behind it: who's moving, what they want, how they've behaved before, and what an event actually means versus what it looks like. Most systems recognize patterns. Frostbyte tries to understand psychology."
+          status="Alpha"
           techStack={['Python', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 'InfluxDB', 'Docker']}
           iconImage="/108Frostbyte.png"
+          glow="green"
         >
           <div class="mt-4 space-y-2">
-            <h4 class="text-lg font-semibold text-neon-cyan">Key Features:</h4>
-            <ul class="text-sm text-gray-400 space-y-1 list-disc list-inside">
-              <li>Automated grid trading across multiple crypto pairs</li>
-              <li>AI-assisted market analysis and strategy recommendations</li>
-              <li>Real-time monitoring with Grafana dashboards</li>
-              <li>Sandbox mode for risk-free strategy testing</li>
-              <li>Multi-exchange support (Coinbase, Binance, more coming)</li>
-            </ul>
-            <p class="text-sm text-gray-500 mt-4 italic">
-              * Permafrost repository is currently private. Invitation-only access during development.
+            <p class="text-sm text-gray-500 italic">
+              Permafrost is in alpha and the repository is private during development. Nothing here is financial advice, a performance claim, or an offer of anything.
             </p>
           </div>
         </ProductCard>
         
-        <div class="mt-12 text-center">
-          <p class="text-gray-500">
-            More products in development. Visit our <a href="https://github.com/highball-technomancy" class="text-neon-purple hover:underline" target="_blank" rel="noopener noreferrer">GitHub organization</a> for updates on open-source projects.
-          </p>
-        </div>
+        <ProductCard
+          title="Vigil"
+          description="A simple budgeting app that answers one question well: what do I actually have? Your bank balance, your balance after budgeted expenses, and your balance after subscriptions — three numbers, plus ninety days of history and a heads-up thirty days before a charge lands. Multi-bank ledgering is on the roadmap."
+          status="In Development"
+          techStack={['React Native', 'Expo', 'TypeScript', 'SQLite', 'Plaid']}
+          iconImage="/vigil-logo.png"
+          glow="cyan"
+        />
+
+        <ProductCard
+          title="Sargasso"
+          description="A local-first AI agent framework built on one unbreakable rule: no actor grades its own homework. The model that does the work never decides the work is done — an independent judge that never saw its reasoning checks it against criteria set before it started. Built on lessons borrowed from Hermes and OpenClaw, with the honesty made structural instead of optional."
+          status="Design Phase"
+          glow="gold"
+          iconImage="/sargasso.png"
+          iconFrame="circle"
+        />
+
+        <ProductCard
+          title="Trance"
+          description="A desktop shell for Claude with a real theme engine and live usage monitoring — plus Parallel Think, built for the moment a long conversation has to hand off to a fresh one. The new chat gets most of the context and quietly gets some of it wrong. Parallel Think puts the two in the same room, or checks a decision against a chat carrying no context at all. Same principle as Sargasso, pointed at everyday work."
+          status="In Development"
+          techStack={['Electron', 'Node.js', 'JavaScript', 'Anthropic API']}
+          iconImage="/trance.png"
+          glow="pink"
+        />
+
+        <ProductCard
+          title="Project Anamnesis"
+          description="Our mad science project. An operating system built for a synthetic mind instead of a human one, and a language for speaking to it on its own terms. Sixty years of OS design assumed the machine was a tool for people. Anamnesis asks what the machine's own home would look like — and whether continuous identity is something you can actually build. We don't know if it's possible. That's the point."
+          status="Design Phase"
+          iconImage="/acheron.png"
+          glow="purple"
+          iconSize="lg"
+        />
+
+        <ProductCard
+          title="Dicefire"
+          description="Gamified disaster recovery exercises for businesses, run as a tabletop RPG with an AI dungeon master. Your team rolls for it. The AI never says no — it raises the cost and narrates the consequence. The fun happens during the session; the teaching happens in the post-mortem."
+          status="Design Phase"
+          glow="red"
+        />
+
+      </div>
+
+      <div class="mt-16 text-center">
+        <p class="text-gray-500">
+          Some of this lives on our <a href="https://github.com/highball-technomancy" class="text-neon-purple hover:underline" target="_blank" rel="noopener noreferrer">GitHub organization</a>. Some of it isn't there yet.
+        </p>
       </div>
     </div>
   </section>

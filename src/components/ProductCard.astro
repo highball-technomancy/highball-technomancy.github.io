@@ -3,22 +3,46 @@
 interface Props {
   title: string;
   description: string;
-  status: 'In Development' | 'Beta' | 'Live' | 'Coming Soon';
+  status: 'In Development' | 'Beta' | 'Live' | 'Coming Soon' | 'Alpha' | 'Design Phase';
   techStack?: string[];
   githubUrl?: string;
   docsUrl?: string;
   demoUrl?: string;
   icon?: string;
   iconImage?: string;
+  glow?: 'green' | 'purple' | 'cyan' | 'pink' | 'gold' | 'orange' | 'red';
+  iconSize?: 'md' | 'lg';
+  iconFrame?: 'none' | 'circle';
 }
 
-const { title, description, status, techStack, githubUrl, docsUrl, demoUrl, icon, iconImage } = Astro.props;
+const { title, description, status, techStack, githubUrl, docsUrl, demoUrl, icon, iconImage, glow = 'green', iconSize = 'md', iconFrame = 'none' } = Astro.props;
+
+const glowClasses = {
+  green: 'glow-green',
+  purple: 'glow-purple',
+  cyan: 'glow-cyan',
+  pink: 'glow-pink',
+  gold: 'glow-gold',
+  orange: 'glow-orange',
+  red: 'glow-red'
+};
+
+const iconSizes = {
+  md: 'max-h-32',
+  lg: 'max-h-32 scale-125'
+};
+
+const iconClasses = iconFrame === 'circle'
+  ? 'h-32 w-32 rounded-full object-cover border border-white/10'
+  : `${iconSizes[iconSize]} w-auto object-contain`;
 
 const statusColors = {
   'In Development': 'border-neon-orange text-neon-orange',
   'Beta': 'border-neon-cyan text-neon-cyan',
   'Live': 'border-neon-green text-neon-green',
-  'Coming Soon': 'border-neon-purple text-neon-purple'
+  'Coming Soon': 'border-neon-purple text-neon-purple',
+  'Alpha': 'border-neon-cyan text-neon-cyan',
+  'Design Phase': 'border-gray-500 text-gray-400'
 };
 ---
 
@@ -28,16 +52,20 @@ const statusColors = {
     <span class={`text-sm px-4 py-1 rounded-full border ${statusColors[status]}`}>
       {status}
     </span>
+  </div>
+
+  <!-- Icon -->
+  <div class="flex items-center justify-center h-32 mb-4">
     {iconImage && (
-      <img src={iconImage} alt={`${title} icon`} class="w-16 h-16 object-contain" />
+      <img src={iconImage} alt={`${title} icon`} class={iconClasses} />
     )}
     {!iconImage && icon && (
-      <span class="text-4xl">{icon}</span>
+      <span class="text-7xl">{icon}</span>
     )}
   </div>
   
   <!-- Title -->
-  <h3 class="text-3xl font-bold mb-4 glow-green">
+  <h3 class={`text-3xl font-bold mb-4 text-center ${glowClasses[glow]}`}>
     {title}
   </h3>
   
