@@ -1,0 +1,177 @@
+---
+// MOCKUP E — the star. Spokes from a centre point, one mark at each end.
+// Spokes are generated from the project count, so a 7th project makes a
+// 7-pointed star rather than breaking the geometry. View at /ontap
+import Base from '../layouts/Base.astro';
+import { getProjects, projectUrl } from '../data/projects.js';
+const projects = await getProjects();
+
+const R = 297;                    // spoke length, centre to mark (10% down from 330)
+const BOX = 738;                  // square the star lives in
+const C = BOX / 2;
+const SLOT = 132;                 // icon slot height; half of it anchors the mark
+
+// Display size per mark, eyeballed. NOT derived from the file — Dicefire's flames
+// and Anamnesis's plume mean their subject is a small part of the image.
+const BASE = 92;
+const sizes = { permafrost:1, dicefire:1.5, sargasso:1.06, trance:1.04,
+                vigil:1.06, anamnesis:1.32 };
+
+// How far the spoke reaches, as a fraction of the mark's height.
+// MEASURED, not guessed: each PNG's alpha channel was sampled along the exact ray
+// the spoke arrives on, to find where visible artwork actually starts. Eyeballing
+// these was wrong every time — the empty canvas differs wildly by direction
+// (Vigil's upper-right is nearly bare; Permafrost fills its canvas evenly).
+// Values are the measured edge minus ~2px so the line visibly meets the art.
+const reach = { permafrost:0.365, dicefire:0.195, sargasso:0.351, trance:0.231,
+                vigil:0.054, anamnesis:0.149 };
+
+// Hand nudges in px. The geometry is perfect but the ARTWORK isn't centred in its
+// canvas the same way for each mark, so a few need shifting to look right.
+// Permafrost and Sargasso sit correctly and get nothing.
+const nudge = {
+  trance:    { x: 0,   y: -20 },
+  vigil:     { x: 18,  y: 0 },
+  anamnesis: { x: 18,  y: 0 },
+  dicefire:  { x: -18, y: 0 },
+};
+const step = 360 / projects.length;
+
+const points = projects.map((p, i) => {
+  const deg = -90 + i * step;     // first mark straight up
+  const rad = (deg * Math.PI) / 180;
+  const cos = Math.cos(rad), sin = Math.sin(rad);
+  const h = BASE * (sizes[p.id] ?? 1);
+  const gap = h * (reach[p.id] ?? 0.42);
+
+  // Labels sit on the far side of the mark from the hub, so nothing ever
+  // points back into the spokes. Direction comes from the angle, not a guess.
+  let side = 'right';
+  if (sin < -0.9) side = 'up';
+  else if (sin > 0.9) side = 'down';
+  else if (cos < 0) side = 'left';
+
+  const n = nudge[p.id] ?? { x: 0, y: 0 };
+
+  return {
+    ...p,
+    // nudge applies to the mark AND the line end, so they stay attached
+    x: C + R * cos + n.x,  y: C + R * sin + n.y,
+    lx: C + (R - gap) * cos + n.x, ly: C + (R - gap) * sin + n.y,
+    h, side,
+  };
+});
+---
+
+<Base title="On Tap — Highball Technomancy">
+<style is:global>
+/* NOTE: tokens, resets, .wrap, the header and the footer all live in
+   Base.astro / tokens.css now. What is left below is only the star. */
+</style>
+
+<style is:global>
+@font-face{font-family:'Typical Writer';src:url('/fonts/typical-writer-font/TypicalWriter-G3LO.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+/* the one line, no title */
+.intro{font-family:'Typical Writer',var(--serif);font-weight:400;font-size:19px;line-height:1.6;color:#a6a6b4;
+  max-width:50ch;margin:0;padding:38px 0 0;}
+</style>
+
+<style is:global>
+/* the star */
+/* generous bottom padding: the lowest mark's jot was running into the sitemap */
+.sky{display:flex;justify-content:center;padding:18px 0 120px;}
+.star{position:relative;width:738px;height:738px;}
+.spokes{position:absolute;inset:0;overflow:visible;}
+.spokes line{stroke:#474756;stroke-width:1;}
+/* hexagon hub, not a dot */
+.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:19px;height:19px;background:#5a5a6b;
+  clip-path:polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);}
+
+/* Each point is a zero-size anchor sitting exactly on its spoke end. The mark is
+   centred on it; the label is placed on the far side from the hub. --r is half
+   the mark's height, set inline per project. */
+.pt{position:absolute;width:0;height:0;}
+/* The slot is sized explicitly (square — every normalized icon is a 256x256
+   canvas). Auto width collapses to 0 inside a zero-width absolute parent. */
+.pslot{position:absolute;left:0;top:0;transform:translate(-50%,-50%);display:block;}
+.pslot img{display:block;width:100%;height:100%;object-fit:contain;
+  transition:transform .2s ease;}
+.pt:hover .pslot img{transform:scale(1.07);}
+
+.ptext{position:absolute;width:250px;display:flex;flex-direction:column;gap:7px;}
+.pt-up .ptext   {left:0;top:calc(-1 * var(--r) - 16px);transform:translate(-50%,-100%);
+                 text-align:center;}
+.pt-down .ptext {left:0;top:calc(var(--r) + 16px);transform:translate(-50%,0);
+                 text-align:center;}
+.pt-right .ptext{left:calc(var(--r) + 20px);top:0;transform:translate(0,-50%);
+                 text-align:left;}
+.pt-left .ptext {left:calc(-1 * var(--r) - 20px);top:0;transform:translate(-100%,-50%);
+                 text-align:right;}
+
+.pname{font-family:var(--serif);font-size:22px;color:#d3d3dc;line-height:1.2;
+  transition:color .18s ease;}
+.pt:hover .pname{color:var(--bright);}
+.pjot{font-size:13.5px;line-height:1.55;color:#848492;
+  transition:color .18s ease;}
+.pt:hover .pjot{color:#a2a2b0;}
+.pt:focus-visible .pname{outline:1px solid var(--accent);outline-offset:6px;}
+
+/* list fallback — a star does not survive a phone */
+.list{display:none;}
+.row{display:flex;align-items:center;gap:14px;padding:16px 0;
+  border-top:1px solid var(--soft);}
+.row:first-child{border-top:none;}
+.rslot{width:54px;height:48px;flex:none;display:flex;align-items:center;
+  justify-content:center;}
+.rslot img{display:block;height:auto;max-height:100%;width:auto;}
+.rname{font-family:var(--serif);font-size:17px;color:var(--bright);}
+.rjot{font-size:12.5px;color:#7c7c8a;margin-top:2px;}
+@media (max-width:900px){
+  .sky{display:none;}
+  .list{display:block;padding:30px 0 10px;}
+}
+</style>
+
+
+<div class="wrap">
+
+  <p class="intro">Our humble collection of ambitions.</p>
+
+  <div class="sky">
+    <div class="star">
+      <svg class="spokes" viewBox={`0 0 ${BOX} ${BOX}`} aria-hidden="true">
+        {points.map((p) => (
+          <line x1={C} y1={C} x2={p.lx} y2={p.ly} />
+        ))}
+      </svg>
+      <span class="hub"></span>
+      {points.map((p) => (
+        <a class={`pt pt-${p.side}`} href={projectUrl(p)}
+           style={`left:${p.x}px;top:${p.y}px;--r:${Math.round(p.h / 2)}px`}>
+          <span class="pslot" style={`width:${Math.round(p.h)}px;height:${Math.round(p.h)}px`}>
+            <img src={p.icon} alt="" /></span>
+          <span class="ptext">
+            <span class="pname">{p.name}</span>
+            <span class="pjot">{p.line}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="list">
+    {projects.map((p) => (
+      <a class="row" href={projectUrl(p)}>
+        <span class="rslot"><img src={p.icon} alt=""
+          style={`height:${Math.round(40 * (p.scale > 1.2 ? 1.15 : p.scale))}px`} /></span>
+        <span>
+          <span class="rname">{p.name}</span>
+          <span class="rjot">{p.line}</span>
+        </span>
+      </a>
+    ))}
+  </div>
+
+</div>
+</Base>

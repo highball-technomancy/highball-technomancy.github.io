@@ -1,0 +1,166 @@
+---
+// /projects/[slug] — one template, one page per project in src/content/projects/.
+// Centered project opening, editorial reading column and recipe margin.
+import Base from '../../layouts/Base.astro';
+import { getProjects, stages } from '../../data/projects.js';
+import { stageColors } from '../../data/stages.js';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+
+const { p } = Astro.props;
+
+// The first section is the intro; later headings retain each project's voice.
+// Blocks are paragraphs, or `- ` bullet lists. `**bold**` works inside both.
+// A body without headings is all intro.
+const raw = (p.entry.body ?? '').trim();
+const inline = (t) =>
+  t.split(/\*\*(.+?)\*\*/g).map((s, i) => ({ b: i % 2 === 1, t: s })).filter((x) => x.t);
+const toBlocks = (t) =>
+  t.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean).map((b) => {
+    const lines = b.split('\n').map((l) => l.trim());
+    return lines.every((l) => l.startsWith('- '))
+      ? { list: lines.map((l) => inline(l.slice(2).trim())) }
+      : { para: inline(b.replace(/\s*\n\s*/g, ' ')) };
+  });
+const sections = raw.startsWith('## ')
+  ? raw.split(/^## /m).map((s) => s.trim()).filter(Boolean).map((s) => {
+      const [title, ...rest] = s.split('\n');
+      return { title: title.trim(), blocks: toBlocks(rest.join('\n')) };
+    })
+  : [{ title: null, blocks: toBlocks(raw) }];
+const [intro, ...more] = sections;
+
+// Small text in the accent has to reach 4.5:1 against the page (--ink #101014).
+// Dark marks (Dicefire's red, Anamnesis's purple) don't, so their TEXT colour is
+// the same hue lifted toward white until it passes. The dot keeps the true
+// sampled colour.
+const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const lum = (rgb) => {
+  const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * f(rgb[0]) + 0.7152 * f(rgb[1]) + 0.0722 * f(rgb[2]);
+};
+const INK = lum([16, 16, 20]);
+let rgb = hex(p.accent);
+for (let t = 0; t < 30 && (lum(rgb) + 0.05) / (INK + 0.05) < 4.5; t++) {
+  rgb = rgb.map((c) => Math.round(c + (255 - c) * 0.08));
+}
+const accentText = `rgb(${rgb.join(',')})`;
+
+// Step ladder: climbed bottom-up, so it is drawn top-down starting at Released.
+const current = stages.indexOf(p.status);
+const ladder = stages
+  .map((s, i) => ({ s, state: i === current ? 'now' : i < current ? 'done' : 'ahead' }))
+  .reverse();
+---
+
+<Base title={`${p.name} — Highball Technomancy`}>
+<div class="wrap">
+  <div class="proj" style={`--accent-dot:${p.accent};--accent-text:${accentText}`}>
+
+    <article>
+      <header class="opening">
+        <div class="mark"><img src={p.icon} alt="" style={`transform:scale(${p.scale})`} /></div>
+        <h1>{p.name}</h1>
+      </header>
+      <div class="body intro">{intro.blocks.map((b) => b.list
+        ? <ul>{b.list.map((i) => <li>{i.map((x) => x.b ? <strong>{x.t}</strong> : x.t)}</li>)}</ul>
+        : <p>{b.para.map((x) => x.b ? <strong>{x.t}</strong> : x.t)}</p>)}</div>
+
+      {p.visual && <img class="visual" src={p.visual} alt="" />}
+
+      {more.map((s) => (
+        <section class="sec">
+          <h2>{s.title}</h2>
+          <div class="body">{s.blocks.map((b) => b.list
+            ? <ul>{b.list.map((i) => <li>{i.map((x) => x.b ? <strong>{x.t}</strong> : x.t)}</li>)}</ul>
+            : <p>{b.para.map((x) => x.b ? <strong>{x.t}</strong> : x.t)}</p>)}</div>
+        </section>
+      ))}
+    </article>
+
+    <aside class="card" aria-label="Project details">
+      <div class="lbl">Step</div>
+      <ol class="ladder">
+        {ladder.map((r) => <li class={r.state} style={`--stage-color:${stageColors[r.s]}`}><span class="dot"></span>{r.s}</li>)}
+      </ol>
+      <div class="lbl">Glass</div>
+      <div class="val">{p.glass}</div>
+      <div class="lbl">Ingredients</div>
+      <ul class="val ing">{p.ingredients.map((x) => <li>{x}</li>)}</ul>
+    </aside>
+
+  </div>
+</div>
+</Base>
+
+<style>
+@font-face{
+  font-family:'Typical Writer';
+  src:url('/fonts/typical-writer-font/TypicalWriter-G3LO.ttf') format('truetype');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+/* A centred reading column with a quiet recipe margin.
+   Uses .wrap (1340), not .wrap-text (1040): the text column is centred on the
+   page and the card is pinned to the container's right edge, so the channel
+   between them is (container − text − card) / 2. At 1040 there is no room for
+   one, and `gap` cannot create it — it only narrows the middle column around a
+   text block that stays where it is. Container width is the lever here. */
+.proj{display:grid;grid-template-columns:170px minmax(0,1fr) 170px;gap:56px;
+  padding:60px 0 120px;}
+article{grid-column:2;min-width:0;max-width:640px;margin:0 auto;}
+.opening{text-align:center;margin:0 0 42px;}
+.mark{width:160px;height:160px;margin:0 auto 22px;}
+/* `scale` is the per-mark optical correction from the project record — the same
+   number the star uses. Each mark carries a different amount of empty space
+   around its artwork, so equal boxes do not look equal. Transform, not width,
+   so the 160px box stays put and the title keeps its baseline. */
+.mark img{display:block;width:100%;height:100%;object-fit:contain;}
+h1{font-family:'Technomancy',var(--sans);font-weight:400;
+  font-size:clamp(30px,4vw,42px);line-height:1.2;letter-spacing:.025em;
+  color:var(--bright);margin:0;text-wrap:balance;overflow-wrap:break-word;}
+.body{font-size:17px;line-height:1.85;color:#a6a6b4;max-width:68ch;}
+.body :global(p){margin:0 0 24px;}
+.body :global(p:last-child){margin-bottom:0;}
+.body :global(ul){list-style:none;margin:26px 0;padding:0;}
+.body :global(li){margin:0 0 24px;padding-left:22px;position:relative;}
+.body :global(li::before){content:'·';position:absolute;left:4px;color:var(--accent-text);}
+.body :global(strong){font-weight:500;color:var(--text);}
+.body :global(li > strong:first-child){display:block;margin-bottom:5px;}
+.body :global(li:last-child){margin-bottom:0;}
+.visual{display:block;width:100%;height:auto;border-radius:8px;margin:48px 0 0;}
+.sec{margin-top:48px;}
+h2{font-family:'Typical Writer',var(--serif);font-style:normal;font-weight:400;
+  font-size:27px;line-height:1.3;color:var(--accent-text);margin:0 0 18px;}
+/* Recipe values and the existing stage ladder retain their original treatment. */
+/* Nudged so the card's centre lines up with the On Tap arrow in the nav.
+   21px, which stays inside .wrap's 52px padding — no overflow, no scrollbar. */
+.card{grid-column:3;position:sticky;top:32px;align-self:start;padding-top:18px;
+  transform:translateX(21px);}
+.lbl{font-family:'Technomancy',var(--sans);font-weight:400;font-size:16px;
+  letter-spacing:.06em;color:var(--dim);margin:0 0 14px;}
+.lbl ~ .lbl{margin-top:34px;}
+.ladder{list-style:none;margin:0;padding:0;
+  font-family:ui-monospace,'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;}
+.ladder li{display:flex;align-items:center;gap:9px;margin:0 0 9px;}
+.dot{width:6px;height:6px;border-radius:50%;flex:none;}
+.done{color:var(--dim);}          .done .dot{background:var(--faint);}
+.now{color:var(--accent-text);}   .now .dot{background:var(--stage-color);}
+.ahead{color:#3a3a44;}            .ahead .dot{background:#2a2a32;}
+.val{font-size:13px;line-height:1.75;color:var(--text);}
+.ing{list-style:none;margin:0;padding:0;}
+@media (max-width:980px){
+  .proj{grid-template-columns:1fr;gap:48px;padding:40px 0 80px;}
+  article,.card{grid-column:1;}
+  /* stacked: the card shares the text column so both share a left edge,
+     instead of the card starting at the page padding and the text inset */
+  .card{position:static;transform:none;max-width:640px;margin:0 auto;width:100%;padding-top:0;}
+  .opening{margin-bottom:32px;}
+  .mark{width:130px;height:130px;margin-bottom:20px;}
+  .sec{margin-top:38px;}
+  h2{font-size:25px;}
+}
+</style>

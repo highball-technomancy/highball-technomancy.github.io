@@ -1,0 +1,16 @@
+---
+import Base from '../../../layouts/Base.astro';
+import AlembicReader from '../../../components/AlembicReader.astro';
+import { getWriting } from '../../../data/alembic.js';
+import '../../../styles/alembic.css';
+export async function getStaticPaths() {
+  return Promise.all(['essays', 'rounds'].map(async (kind) => ({ params: { kind }, props: { kind, entries: await getWriting(kind) } })));
+}
+const { kind, entries } = Astro.props;
+const label = kind === 'essays' ? 'Essays' : 'Rounds';
+---
+<Base title={`${label} — The Alembic`}>
+  <main class="wrap alembic">
+    {entries[0] ? <AlembicReader entry={entries[0]} entries={entries} kind={kind} /> : <section class="empty"><a class="back" href="/alembic">← The Alembic</a><h1>{label}</h1><p>{kind === 'essays' ? 'Our first essay explores Frostbyte and the reasoning behind its architecture.' : 'Our opening Round will cover the site overhaul and the beginning of these updates.'}</p><p>Nothing published yet. More soon.</p></section>}
+  </main>
+</Base>
