@@ -10,7 +10,7 @@ const essay = essays[0], round = rounds[0];
 <Base title="The Alembic — Highball Technomancy">
 <main class="wrap alembic">
   <div class="masthead"><div><p class="eyebrow">Highball Technomancy / The workbench</p><h1>The Alembic</h1><p class="tagline">where madmen scribble</p></div><p class="intro">Essays on the ideas behind the work.<br />Rounds checking in on the projects and the lab.</p></div>
-  <nav class="sections" aria-label="The Alembic"><a href="/alembic/essays">ESSAYS</a><a href="/alembic/rounds">ROUNDS</a><a href="#bench">ON THE BENCH</a><span>An open notebook, in occasional installments.</span></nav>
+  <nav class="sections" aria-label="The Alembic"><a href="/alembic/essays">ESSAYS</a><a href="/alembic/rounds">ROUNDS</a><a href="https://github.com/highball-technomancy/highball-technomancy.github.io/discussions">OPEN BAR</a><a href="#bench">ON THE BENCH</a><span>An open notebook, in occasional installments.</span></nav>
   <div class="editorial">
     <section class="essay"><h2 class="section-name">Essays <span>Ideas & architecture</span></h2>
       {essay ? <><div class="meta">Latest essay{essay.data.draft && ' / Draft preview'}</div><h3 class="feature-title"><a href={entryUrl(essay)}>{essay.data.title}</a></h3><p class="deck">{essay.data.description}</p><a class="read" href={entryUrl(essay)}>Read the essay ↗</a></> : <><h3 class="feature-title">The first essay is taking shape.</h3><p class="deck">Frostbyte, and the reasoning behind its architecture.</p><a class="read" href="/alembic/essays">Visit Essays ↗</a></>}

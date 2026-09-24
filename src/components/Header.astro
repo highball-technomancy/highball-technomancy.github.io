@@ -25,7 +25,8 @@ const wordmark = 'TECHNOMANCY'.split('');
         {projects.map((p) => <a href={projectUrl(p)}>{p.name}</a>)}
       </div>
     </div>
-    <a href="#">Team</a>
+    <a href="/lab" aria-current={Astro.url.pathname.startsWith('/lab') ? 'page' : undefined}>The Lab</a>
+    <a href="/contact" aria-current={Astro.url.pathname.startsWith('/contact') ? 'page' : undefined}>Contact</a>
   </div>
 </nav>
 

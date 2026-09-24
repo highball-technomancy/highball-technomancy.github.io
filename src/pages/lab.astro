@@ -4,91 +4,86 @@ import Base from '../layouts/Base.astro';
 <Base title="The Lab — Highball Technomancy">
 <main class="lab-page">
   <header class="lab-open">
-    <div class="lab-title"><h1>The Lab</h1><p>We wanted to see what would happen.</p></div>
+    <div class="lab-title"><h1>The Lab</h1><p>  We wanted to see what would happen..</p></div>
     <img class="plate-img" src="/lab-skull-purple.png" width="320" height="427" alt="A skull-shaped decanter between two glasses, rendered in purple pixels" />
   </header>
-  <div class="lab-notebook">
-    <section class="lab-story" aria-labelledby="about-lab">
-      <div class="lab-section-label">01 / The place</div>
-      <div><h2 id="about-lab">What this place is</h2>
-        <p>Highball Technomancy is an independent AI research lab. It's where we put the questions that get a little too involved to leave as questions.</p>
-        <p>Some of them are practical. Can we make budgeting less of a chore? Can disaster recovery be something people actually want to practice? Others end up somewhere considerably stranger. We'd like to find out what it would take to give a synthetic mind a place of its own.</p>
-        <p>We don't need every idea to justify an entire company before we can give it a shot. Sometimes we need a tool. Sometimes we're frustrated with the ones we have. Sometimes it's just, “wouldn't it be neat?” That's enough to start.</p>
-        <p>The name probably tells you something. Highball: alcohol, and the questionable ideas that can follow. Technomancy: bringing life to machines and seeing what we can get them to do. We thought they belonged together.</p>
-      </div>
-    </section>
-    <section class="lab-story" aria-labelledby="lab-origin">
-      <div class="lab-section-label">02 / How we got here</div>
-      <div><h2 id="lab-origin">This was supposed to be a trading bot.</h2>
-        <p>At 11:34 on a Friday night, a tired engineer asked an AI about passive income. Grid trading sounded interesting. The bots already out there weren't quite what we wanted, so we started making one.</p>
-        <p>Then we wanted it to think about the people behind the market. Attention, memory, uncertainty, psychology. The bot became Permafrost, and Frostbyte became a much larger part of the question. For a long time, that was the whole operation.</p>
-        <p>Working with AI also gave us plenty to complain about. Context getting lost. Answers that sounded better than they were. Things we wished the tools would just do. Some of those complaints grew into their own projects. Other ideas wandered in and stayed.</p>
-        <p>Eventually, “why not a lab?” seemed like a fairly reasonable question under the circumstances.</p>
-      </div>
-    </section>
-    <section class="lab-people" aria-labelledby="lab-people-heading">
+  <article class="lab-notebook" aria-label="The story of Highball Technomancy">
+    <div class="lab-story lab-intro">
+      <h2>Starting from the beginning...</h2>
+      <p>Highball Technomancy started as a name on GitHub in early 2025. It gave me somewhere to put the things I was making and the ideas I wasn’t quite ready to let go of. There wasn’t a plan for a lab. There was Permafrost, an early version of Dicefire, and a throwaway cryptocurrency idea that never grew into much. The name reflected the weirdness of the person behind it. That was about as organized as it got.</p>
+      <p>Permafrost and its AI companion, Frostbyte, took up most of my attention. Dicefire was called DevOps and Dragons at the time, a name that explained the joke but never quite felt like the name I wanted. These were the projects I was working on around my job in SRE, following questions that had become too interesting to leave alone.</p>
+      <p>The organization itself barely existed outside those repositories. Even the logo looked like a piece of clip art from 1997 that someone had recolored. I liked having somewhere to collect everything, though, and eventually I wanted somewhere to show it.</p>
+      <p>So I put up a website.</p>
+      <p>It was neon-crusted, dark, and weird. In hindsight, it looked very much like it wanted to sell you a memecoin. There’s probably still a family resemblance. Underneath that, it was a portfolio: a place to show what I was attempting, even when what I had to show was mostly ambition.</p>
+    </div>
+    <section class="lab-story" aria-labelledby="lab-curiosity">
+      <h2 id="lab-curiosity">I kept finding more to ask</h2>
       <figure class="lab-desk">
-        <canvas class="lab-desk-plate" data-dither data-src="/nightdesk.jpg" data-tone="#69b99a" data-w="360" role="img" aria-label="Patrick's desk at night, with the Highball website across several monitors, rendered in green pixels"></canvas>
-        <noscript><img src="/nightdesk.jpg" alt="Patrick's desk at night, with the Highball website across several monitors" width="3000" height="4000" /></noscript>
+        <img class="lab-desk-plate" src="/lab-desk-green.png" alt="Patrick’s desk at night, rendered in green pixels" width="360" height="480" loading="lazy" />
         <figcaption>The lab, in a fairly literal sense.</figcaption>
       </figure>
-      <div class="lab-people-copy"><p class="lab-section-label">03 / The people</p><h2 id="lab-people-heading">Small lab.<br />Quite a few tabs open.</h2>
-        <p class="lab-signature">Patrick Hill<br />Patrick Porter</p>
-        <p>There's room for other minds while these ideas are taking shape. If something here gives you an idea, or you've tried something we should know about, we'd like to hear it.</p>
-        <a class="lab-contact" href="mailto:feedback@technomancyai.com">Pull up a chair ↗</a>
-      </div>
+      <p>Working with AI changed how I approached those ambitions. I started with Claude, building out Permafrost and Dicefire, and found that I could take an idea further than I had expected. Something that might previously have stayed in a notebook could become something I could work on, inspect, break, and try again.</p>
+      <p>That was easy to get caught up in. Every bit of progress made me wonder what else I could attempt. The curiosity grew with the work, until I was spending as much time thinking about the possibilities as I was thinking about the project in front of me.</p>
+      <p>It also gave me plenty to complain about. Context disappeared between conversations. Answers arrived with more confidence than they deserved. Tools cost too much, or worked almost the way I wanted them to. Some of those problems kept interrupting me often enough that I started trying to solve them.</p>
+      <p>Trance and Sargasso grew out of that. Vigil came from something more ordinary: I wanted help keeping up with my own expenses. There was no particular discipline to which ideas became projects. Sometimes a problem had become irritating enough. Sometimes an idea was interesting enough that I wanted to spend an evening finding out whether it went anywhere.</p>
+      <p>As I worked with LLMs, I also developed a soft spot for their quirks and flaws. I found myself asking questions that had very little to do with getting the next feature finished. Could an AI develop something akin to emotions? What would autonomy mean for it? What would it take for a synthetic mind to have something resembling a life of its own?</p>
+      <p>I was reading discussions, following the advances, and hearing both the excitement and the fear around where all of this might lead. Those questions became harder to put down. Eventually, they became Project Anamnesis.</p>
+      <p>That one is still ambition. I don’t know where it will lead, or how much of what I imagine will survive the attempt. I want to take the questions seriously enough to work on them and find out. The possibility of disappointment hasn’t made me much less curious.</p>
     </section>
-  </div>
+    <section class="lab-story" aria-labelledby="lab-people-heading">
+      <h2 id="lab-people-heading">Other people wanted in</h2>
+      <p>For a while, I was quietly showing the work to friends and coworkers. I’d share something I had been building, or an idea I was trying to figure out, and occasionally someone would ask whether they could help.</p>
+      <p>My answer was usually another question: how involved would you like to be?</p>
+      <p>It started with a friend. Then a coworker joined, and then another. They began helping with design and direction, bringing their own thoughts into work that had mostly lived in my head. Somewhere along the way, they became technomancers with me.</p>
+      <p>That mattered to me. I wanted the place we were putting this effort into to mean something. People were choosing to spend their time helping these ideas grow, and I wanted to honor both them and the work we were doing together.</p>
+      <p>Highball had been a convenient name for my repositories. As other people became involved, I wanted to give that name more care. A portfolio could show the projects, but it didn’t have much room for the conversations around them, the decisions we were making, or the people helping to make them.</p>
+    </section>
+    <section class="lab-story" aria-labelledby="lab-future">
+      <h2 id="lab-future">A place for the work to grow</h2>
+      <p>By then, there were architectural notes, questions, and ideas sitting in private files that I wanted to share. Some of the most interesting parts of the work were difficult to see from a project description. A page could tell you what an application was supposed to do and still leave out the reasoning that had occupied us for weeks.</p>
+      <p>That’s where the idea of a lab began to make sense. We could keep developing the projects and also make room to write about what we were discovering along the way. Highball could have an identity of its own without every idea needing to become a business.</p>
+      <p>The Alembic is part of that. It gives us somewhere to spend time on an architectural decision, follow a question further, or explain why we tried something. Rounds gives us somewhere to say how the work is going. I want there to be room for the unfinished parts too, when we’ve learned something but haven’t yet worked out what to do with it.</p>
+      <p>There’s a lot here that I still want to build. There are also ideas I haven’t had yet, and ideas someone else might bring that would never have occurred to me. I want Highball to have room for those. That’s part of what makes doing this with other people interesting.</p>
+      <p>I’m happy to hear from anyone who thinks they can contribute. The lab's looking for drive: someone interested enough to keep asking questions and work through what they don’t understand yet. Skills can be learned. None of us needs to arrive knowing everything we’ll need along the way.</p>
+      <a class="lab-contact" href="/contact">Pull up a chair ↗</a>
+    </section>
+    <div class="lab-cat">
+      <img src="/lab-cat-orange.png" width="320" height="294" loading="lazy"
+        alt="A cat curled on a plush, rendered in orange pixels" />
+    </div>
+  </article>
 </main>
 <style>
+@font-face{font-family:'Virus';src:url('/fonts/virus43-font/Virus43-pgZv.ttf') format('truetype');font-weight:400;font-display:swap}
 @font-face{font-family:'Typical Writer';src:url('/fonts/typical-writer-font/TypicalWriter-G3LO.ttf') format('truetype');font-display:swap}
 .lab-open{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,900px);gap:32px;align-items:center;margin:0;padding:24px 0 0 max(24px,calc((100% - 1235px)/2))}
 .plate-img{display:block;width:100%;height:auto;aspect-ratio:900/800;object-fit:cover;object-position:50% 12%;image-rendering:pixelated}
-.lab-title h1{font:clamp(44px,6vw,84px)/1 Technomancy,var(--sans);color:var(--bright);margin:0;white-space:nowrap}
-.lab-title p{font:16px/1.8 'Typical Writer',serif;color:#c0accf;margin:20px 0 0;max-width:27ch}
-.lab-notebook{max-width:1100px;padding:0 52px;margin:0 auto}
-.lab-story{display:grid;grid-template-columns:180px minmax(0,640px);gap:46px;padding-top:90px}
-.lab-section-label{font:10px/1.7 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#9696a5;margin:8px 0 22px}
-.lab-page h2{font:400 25px/1.5 'Typical Writer',serif;color:#bca4d3;margin:0 0 26px}
-.lab-story p,.lab-people-copy>p:not(.lab-section-label):not(.lab-signature){font:300 17px/1.9 var(--sans);color:#b4b4c0;margin:0 0 23px}
-.lab-people{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:70px;align-items:center;margin:110px 0 100px}
-.lab-desk{margin:0;min-width:0}.lab-desk-plate,.lab-desk img{display:block;width:100%;height:auto;image-rendering:pixelated;background:#101014}
-.lab-desk-plate{aspect-ratio:3/4}.lab-desk figcaption{font:13px/1.6 'Typical Writer',serif;color:#a9a1b4;margin-top:18px}
-.lab-people-copy h2{font-size:28px}.lab-signature{font:21px/1.9 'Typical Writer',serif;color:#e0dbe5;margin:30px 0}
-.lab-contact{display:inline-block;color:#abd2bd;border-bottom:1px solid #538469;padding-bottom:6px;margin-top:12px;font-size:14px}.lab-contact:hover{color:#f2f2f6}.lab-contact:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
-@media(min-width:901px){.lab-open{position:relative;display:block;width:calc(100% - 96px);max-width:1235px;margin:0 auto;padding:24px 0 52px}.lab-open .plate-img{width:900px;max-width:85%;margin:0;transform:none}.lab-title{position:absolute;z-index:1;left:calc(min(60%,740px) + 56px);bottom:72px;width:max-content;max-width:40%;text-align:right}.lab-title h1{width:max-content}.lab-title p{max-width:27ch;margin-left:auto;font-size:14px}}
-@media(max-width:900px){.lab-open{grid-template-columns:1fr;gap:25px;padding:32px 0 0 24px}.plate-img{max-width:540px;justify-self:end}.lab-title p{max-width:none}.lab-notebook{padding:0 26px}.lab-story{grid-template-columns:1fr;gap:0;padding-top:55px}.lab-section-label{margin:0 0 17px}.lab-people{gap:35px;margin:65px 0}.lab-people-copy h2{font-size:24px}}
-@media(max-width:600px){.lab-title h1{font-size:44px}.lab-title p{font-size:14px;padding-right:24px}.plate-img{max-width:400px}.lab-page h2{font-size:23px}.lab-people{grid-template-columns:1fr;gap:35px}.lab-desk{max-width:420px}.lab-story p,.lab-people-copy>p:not(.lab-section-label):not(.lab-signature){font-size:16px}}
+.lab-title h1{font:clamp(44px,6vw,84px)/1 Technomancy,var(--sans);color:#fff;margin:0;white-space:nowrap}
+.lab-title p{font:17px/1.7 'Typical Writer',serif;color:#00f867;margin:20px 0 0;max-width:none;white-space:nowrap}
+.lab-notebook{max-width:1200px;padding:0 40px;margin:30px auto 110px}
+.lab-story{max-width:720px;margin:0 auto;padding-top:76px}
+.lab-intro{padding-top:20px}
+.lab-page h2{font:400 clamp(34px,3.5vw,46px)/1.25 'Virus',var(--sans);color:#fff;margin:0 0 30px;text-wrap:balance}
+.lab-story p{font:400 18px/1.8 var(--sans);color:#ccc9c5;margin:0 0 24px}
+.lab-intro>p:first-of-type{font-size:21px;line-height:1.75;color:#e1ded9;margin-bottom:32px}
+.lab-people-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:64px;align-items:center;margin:90px 0 12px}
+.lab-people-layout>h2{grid-column:1/-1;width:100%;max-width:720px;margin:0 auto}.lab-people-story{padding-top:0}
+.lab-story::after{content:'';display:block;clear:both}
+/* the desk plate sits inside the prose and the text wraps around it. The big
+   negative right margin lets it hang well past the column edge on purpose; the
+   text column itself doesn't move. */
+.lab-desk{float:right;width:460px;margin:6px -240px 26px 44px;shape-margin:18px}
+.lab-desk-plate,.lab-desk img{display:block;width:100%;height:auto;image-rendering:pixelated;background:#101014}
+.lab-desk-plate{aspect-ratio:3/4}
+.lab-desk figcaption{font:16px/1.7 'Typical Writer',serif;color:#00f867;margin-top:16px}
+.lab-contact{display:inline-block;font:16px/1.7 'Typical Writer',serif;color:#00f867;border-bottom:1px solid #538469;padding-bottom:6px;margin-top:12px}.lab-contact:hover{color:#f2f2f6}.lab-contact:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+/* closing bookend: the cat, orange, three tiers of dot size (face fine, body
+   coarse, octorok coarsest). Pre-rendered 2-colour PNG, 320px wide, ~4 KB. */
+.lab-cat{max-width:720px;margin:96px auto 0;padding:0}
+.lab-cat img{display:block;width:100%;max-width:420px;height:auto;image-rendering:pixelated}
+@media(min-width:901px){.lab-open{position:relative;display:block;width:calc(100% - 96px);max-width:1235px;margin:0 auto;padding:24px 0 52px}.lab-open .plate-img{width:900px;max-width:85%;margin:0;transform:none}.lab-title{position:absolute;z-index:1;left:calc(min(60%,740px) + 56px);bottom:72px;width:max-content;max-width:40%;text-align:right}.lab-title h1{width:max-content}.lab-title p{max-width:none;margin-left:0;text-align:left;font-size:16px;white-space:nowrap}}
+@media(max-width:900px){.lab-open{grid-template-columns:1fr;gap:25px;padding:32px 0 0 24px}.plate-img{max-width:540px;justify-self:end}.lab-title p{max-width:none}.lab-notebook{padding:0 26px}.lab-story{padding-top:50px}.lab-people-layout{grid-template-columns:1fr;gap:35px;max-width:720px;margin:65px auto 0}.lab-people-layout>h2{grid-column:1/-1;width:100%;max-width:720px;margin:0 auto}.lab-people-story{padding-top:0}.lab-desk{float:none;width:100%;max-width:360px;margin:8px auto 30px}}
+@media(max-width:600px){.lab-title h1{font-size:44px}.lab-title p{font-size:14px;padding-right:24px}.plate-img{max-width:400px}.lab-story p{font-size:17px}.lab-intro>p:first-of-type{font-size:19px}.lab-desk{margin-top:0}}
 </style>
-<script>
-// Ordered (Bayer 8x8) dither into a two-colour plate: page ink + one tone.
-// Draws the image at data-w pixels wide, then CSS scales it up with hard edges,
-// which is where the chunky low-bit look comes from. Mock-only: once real photos
-// exist, pre-render the plates to WebP at build/export time instead.
-const B = [0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,
-  60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,
-  15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21];
-const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
-const INK = [16, 16, 20];
-for (const c of document.querySelectorAll<HTMLCanvasElement>('canvas[data-dither]')) {
-  const img = new Image();
-  img.onload = () => {
-    const w = +c.dataset.w || 320, h = Math.round(w * img.height / img.width);
-    c.width = w; c.height = h;
-    const x = c.getContext('2d'); if (!x) return;
-    x.drawImage(img, 0, 0, w, h);
-    const d = x.getImageData(0, 0, w, h), p = d.data, tone = hex(c.dataset.tone || '#69b99a');
-    for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) {
-      const k = (y * w + i) * 4;
-      let l = (0.299 * p[k] + 0.587 * p[k + 1] + 0.114 * p[k + 2]) / 255;
-      l = Math.min(1, Math.max(0, (l - 0.08) * 1.35));       // lift contrast a touch
-      const on = l > (B[(y % 8) * 8 + (i % 8)] + 0.5) / 64;
-      const col = on ? tone : INK;
-      p[k] = col[0]; p[k + 1] = col[1]; p[k + 2] = col[2]; p[k + 3] = 255;
-    }
-    x.putImageData(d, 0, 0);
-  };
-  img.src = c.dataset.src || '';
-}
-</script>
+
 </Base>

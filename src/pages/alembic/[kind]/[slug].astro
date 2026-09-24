@@ -12,4 +12,4 @@ export async function getStaticPaths() {
 }
 const { kind, entry, entries } = Astro.props;
 ---
-<Base title={`${entry.data.title} — The Alembic`}><main class="wrap alembic"><AlembicReader entry={entry} entries={entries} kind={kind} /></main></Base>
+<Base title={`${entry.data.title} — The Alembic`} description={entry.data.description}><main class="wrap alembic"><AlembicReader entry={entry} entries={entries} kind={kind} /></main></Base>

@@ -1,0 +1,55 @@
+---
+// technomancers.astro — MOCK (2026-09-23). Same card, same rows as /contact, with
+// the people instead of the ways to reach the lab. Look lives in menu-card.css.
+// Roles are placeholders: nobody's title is invented here.
+import Base from '../layouts/Base.astro';
+import '../styles/menu-card.css';
+
+const people = [
+  { name: 'Patrick Hill',    role: 'Founder', email: 'pahill@technomancyai.com' },
+  { name: 'Roxanne Medina',  role: 'Design, Engineering',  email: 'rmedina@technomancyai.com' },
+  { name: 'Patrick Porter',  role: 'Consultancy, Disaster Recovery',  email: 'pporter@technomancyai.com' },
+  { name: 'Joshua Hunter',   role: 'Design, Editing',  email: 'jhunter@technomancyai.com' },
+];
+---
+
+<Base title="Technomancers — Highball Technomancy">
+<main class="contact-page">
+  <div class="menu-card adepts">
+    <svg class="rings" viewBox="0 0 320 320" aria-hidden="true">
+      <circle cx="150" cy="140" r="96" /><circle cx="150" cy="140" r="88" />
+      <circle cx="196" cy="196" r="82" /><circle cx="196" cy="196" r="75" />
+    </svg>
+
+    <header class="menu-head">
+      <p class="eyebrow">Highball Technomancy</p>
+      <h1>Technomancers</h1>
+    </header>
+
+    <ul class="menu">
+      {people.map((p) => (
+        <li>
+          <a href={`mailto:${p.email}`} style="--tone:#00e5ff">
+            <span class="m-name">{p.name}<span class="p-role">{p.role}</span></span>
+            <span class="m-dots" aria-hidden="true"></span>
+            <span class="m-value">{p.email}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <footer class="menu-foot">
+      <span class="m-else">Elsewhere</span>
+      <a href="https://github.com/highball-technomancy">GitHub</a>
+      <a class="back" href="/contact">← Contact</a>
+    </footer>
+  </div>
+</main>
+<style is:global>
+/* page-specific: addresses read as plain white here (no per-row colour to carry),
+   and the list starts lower so the coaster rings never sit behind a row. */
+.adepts .m-value{color:#fff}
+.adepts .menu-head{margin-bottom:104px}
+@media(max-width:600px){.adepts .menu-head{margin-bottom:64px}}
+</style>
+</Base>

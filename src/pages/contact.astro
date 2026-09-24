@@ -1,0 +1,60 @@
+---
+// contact.astro — MOCK (2026-09-23). Identity: the menu behind the bar. Every other
+// page is a place; this is the one where you order something. Menu typography with
+// dotted leaders, no images, no dither (that belongs to the Lab). The only ornament
+// is drawn: overlapping ring stains in SVG, like coasters left on the page.
+// The look lives in styles/menu-card.css, shared with /technomancers.
+// Copy in [brackets] is a placeholder — Patrick writes it.
+import Base from '../layouts/Base.astro';
+import '../styles/menu-card.css';
+
+const menu = [
+  { name: 'Feedback', value: 'feedback@technomancyai.com', href: 'mailto:feedback@technomancyai.com', tone: '#00f867',
+    note: 'Questions, Comments, Conundrums, Snarks, Criticisms, Interests, Favors, Schemes, and any other thing you\'d like to say to us.' },
+  { name: 'Open discussion', value: 'The Open Bar', href: 'https://github.com/highball-technomancy/highball-technomancy.github.io/discussions', tone: '#e5048b',
+    note: 'In case you missed it, come ask lingering questions for everyone to see.' },
+  { name: 'Technomancers', value: 'The adepts', href: '/technomancers', tone: '#00e5ff',
+    note: 'Find an individual.' },
+  { name: 'Support the lab', value: 'Buy a round', href: 'https://github.com/sponsors/highball-technomancy', tone: '#ff9800',
+    note: 'Help us grow in other ways.' },
+];
+const elsewhere = [
+  { label: 'GitHub',   href: 'https://github.com/highball-technomancy' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/patrickalanhill/' },
+];
+---
+
+<Base title="Contact — Highball Technomancy">
+<main class="contact-page">
+  <div class="menu-card">
+    <!-- coaster rings: drawn, not photographed -->
+    <svg class="rings" viewBox="0 0 320 320" aria-hidden="true">
+      <circle cx="150" cy="140" r="96" /><circle cx="150" cy="140" r="88" />
+      <circle cx="196" cy="196" r="82" /><circle cx="196" cy="196" r="75" />
+    </svg>
+
+    <header class="menu-head">
+      <p class="eyebrow">Highball Technomancy</p>
+      <h1>Contact</h1>
+    </header>
+
+    <ul class="menu">
+      {menu.map((m) => (
+        <li>
+          <a href={m.href} style={`--tone:${m.tone}`}>
+            <span class="m-name">{m.name}</span>
+            <span class="m-dots" aria-hidden="true"></span>
+            <span class="m-value">{m.value}</span>
+          </a>
+          <p class="m-note">{m.note}</p>
+        </li>
+      ))}
+    </ul>
+
+    <footer class="menu-foot">
+      <span class="m-else">Elsewhere</span>
+      {elsewhere.map((e) => <a href={e.href}>{e.label}</a>)}
+    </footer>
+  </div>
+</main>
+</Base>

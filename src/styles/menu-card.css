@@ -1,0 +1,46 @@
+/* menu-card.css — the shared look for Contact and Technomancers.
+   Identity: the menu behind the bar. A card one shade lighter than the page,
+   rows of name … value with dotted leaders, drawn coaster rings as the only
+   ornament. Both pages import this so they can't drift apart. */
+.contact-page{display:flex;justify-content:center;padding:80px 24px 130px}
+.menu-card{position:relative;width:100%;max-width:720px;background:#15151b;
+  border:1px solid #26262f;border-radius:4px;padding:56px 56px 40px;overflow:hidden}
+.rings{position:absolute;right:-40px;top:-30px;width:320px;height:320px;
+  fill:none;stroke:#ffffff;stroke-opacity:.045;stroke-width:9;pointer-events:none}
+
+.menu-head{position:relative;margin-bottom:46px}
+.eyebrow{font:11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
+  color:#6f6f7d;margin:0 0 16px}
+.menu-card h1{font:52px Technomancy,var(--sans);color:var(--bright);margin:0;line-height:1}
+.menu-head .blurb{font:16px/1.7 'Typical Writer',serif;color:#00f867;margin:18px 0 0}
+
+/* the rows: name … value */
+.menu{list-style:none;margin:0;padding:0}
+.menu li{padding:22px 0;border-top:1px solid #23232c}
+.menu li:first-child{border-top:none;padding-top:0}
+.menu a{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.m-name{font:400 21px/1.3 var(--serif);color:var(--bright);flex:none}
+.m-dots{flex:1;height:1em;border-bottom:1px dotted #3c3c48;transform:translateY(-.32em)}
+.m-value{font:14px/1.4 'Typical Writer',serif;color:var(--tone);flex:none}
+.menu a:hover .m-name{color:var(--tone)}
+.menu a:hover .m-dots{border-bottom-color:var(--tone)}
+.m-note{font:13.5px/1.7 var(--sans);color:#8a8a98;margin:8px 0 0;max-width:52ch}
+.p-role{font:11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+  color:#6f6f7d;margin-left:14px;vertical-align:middle}
+
+.menu-foot{display:flex;align-items:baseline;gap:22px;margin-top:44px;
+  padding-top:24px;border-top:1px solid #23232c}
+.m-else{font:11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:#6f6f7d}
+.menu-foot a{font-size:14px;color:#b9b9c6}
+.menu-foot a:hover{color:var(--bright)}
+.menu-foot .back{margin-left:auto;color:#8a8a98}
+
+@media(max-width:600px){
+  .contact-page{padding:44px 16px 80px}
+  .menu-card{padding:36px 26px 30px}
+  .menu-card h1{font-size:38px}
+  .menu a{flex-wrap:wrap;gap:4px}
+  .m-dots{display:none}
+  .m-value{flex-basis:100%}
+  .p-role{margin-left:10px}
+}

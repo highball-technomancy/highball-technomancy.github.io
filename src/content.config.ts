@@ -27,6 +27,7 @@ const writingSchema = z.object({
   title: z.string(),
   description: z.string(),
   date: z.coerce.date(),
+  author: z.string().default('Patrick Hill'),   // byline; one name per entry for now
   draft: z.boolean().default(false),
   projects: z.array(reference('projects')).default([]),
   tags: z.array(z.string()).default([]),
