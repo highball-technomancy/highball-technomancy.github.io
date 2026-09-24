@@ -117,6 +117,7 @@ Don't change those category ids once an entry has comments. Giscus looks for a p
 
 ## Troubleshooting
 
+- **Site loads with no styling:** GitHub Pages runs Jekyll by default, and Jekyll drops any file starting with `_`. Astro names some bundles that way (`_slug_.*.css`). `public/.nojekyll` switches Jekyll off. It's an empty file, and the site breaks without it.
 - **Page looks stale after a deploy:** hard refresh (Ctrl+Shift+R). A deploy that's still propagating can cache a 404 for a single file.
 - **Sitemap or a draft behaving oddly on the dev server:** those are build-time features. Use `npm run build` then `npm run preview`.
 - **Custom domain stops working:** check Settings → Pages. The custom domain should be `technomancyai.com`, the source should be `main` at `/docs`, and HTTPS should be enforced. Then check `public/CNAME` holds a single line.
