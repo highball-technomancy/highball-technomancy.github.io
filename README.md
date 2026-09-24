@@ -1,182 +1,131 @@
 # Highball Technomancy
 
-**Binary Spirits, Digital Alchemy** ✨🥃
+**Binary Spirits, Digital Alchemy.** 🥃
 
-Official website for Highball Technomancy - building AI-powered tools for the adventurous.
+This is the website for Highball Technomancy, an independent lab that builds AI systems mostly to find out whether they can be built. Some of it is alive. The rest is design documents, strong opinions, and the scribblings of madmen.
 
-## 🚀 Live Site
+Live at [technomancyai.com](https://technomancyai.com).
 
-Visit us at: [technomancyai.com](https://technomancyai.com)
+## What's on the site
 
-## 🛠️ Tech Stack
+| Page | What it is |
+|------|------------|
+| `/` | The front door |
+| `/ontap` | Every project, and `/ontap/<slug>` for each one |
+| `/alembic` | The Alembic: essays and rounds (update posts), each with comments |
+| `/lab` | How the lab started |
+| `/contact` | The menu behind the bar |
+| `/technomancers` | The people |
 
-- **Framework:** [Astro](https://astro.build) (static site generator)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com) (utility-first CSS)
-- **Deployment:** GitHub Pages
-- **Custom Features:** 
-  - Animated SVG logo (highball glass with neon tech elements)
-  - Particle background animation (binary code floating)
-  - Smooth scroll navigation
-  - Glassmorphism effects
-  - Neon glow hover states
+Open discussion (the Open Bar) lives on [GitHub Discussions](https://github.com/highball-technomancy/highball-technomancy.github.io/discussions), not on the site.
 
-## 📦 Installation
+## Stack
 
-1. **Install dependencies:**
-```bash
-npm install
+- [Astro 5](https://astro.build), a static site generator. Content lives in markdown collections.
+- Plain CSS with design tokens in `src/styles/tokens.css`. Tailwind is still wired in through the Astro integration.
+- [Giscus](https://giscus.app) for comments, backed by GitHub Discussions.
+- GitHub Pages for hosting, served from `/docs`.
+
+## Running it locally
+
+```powershell
+npm install        # first time only
+npm run dev        # live-reloading dev server at http://localhost:4321
+npm run build      # builds the site into /docs
+npm run preview    # serves /docs locally, the closest thing to production
 ```
 
-2. **Run development server:**
-```bash
-npm run dev
-```
-Visit `http://localhost:4321` to see the site locally.
+A few things only happen at build time, so check them with `preview`, not `dev`:
 
-## 🏗️ Building for Production
+- The sitemap (`/sitemap-index.xml`) is generated.
+- Entries marked `draft: true` are left out. On the dev server they still show, labelled as drafts.
 
-To build the site and generate static files in the `/docs` directory:
+Changes to `src/content.config.ts` need a dev server restart.
 
-```bash
-npm run build
-```
+## Deploying
 
-This will create optimized HTML/CSS/JS in the `/docs` folder, which GitHub Pages will serve.
+1. `npm run build`
+2. `npm run preview` and look it over, including at phone width.
+3. Commit both the source and the regenerated `/docs`, then push to `main`.
+4. Give GitHub Pages a minute or two, then hard refresh (Ctrl+Shift+R) before judging anything.
 
-## 🚢 Deployment
+The custom domain comes from `public/CNAME`, which the build copies to `docs/CNAME`. It must contain exactly one line, `technomancyai.com`. If a merge conflict ever lands on that file, keep one copy of the domain, never both.
 
-The site auto-deploys to GitHub Pages:
-
-1. Push changes to the `main` branch
-2. GitHub Pages automatically serves from the `/docs` directory
-3. Custom domain configured via `docs/CNAME`
-
-### Manual Deploy (if needed)
-```bash
-npm run build
-git add docs/
-git commit -m "Deploy updated site"
-git push origin main
-```
-
-## 📁 Project Structure
+## Project structure
 
 ```
-/
-├── src/
-│   ├── components/       # Reusable Astro components
-│   │   ├── Logo.astro           # Animated SVG logo
-│   │   ├── Navigation.astro     # Top nav with smooth scroll
-│   │   ├── Hero.astro           # Hero section with particles
-│   │   ├── ProductCard.astro    # Product showcase cards
-│   │   └── Footer.astro         # Site footer
-│   ├── layouts/
-│   │   └── Layout.astro  # Base HTML layout
-│   ├── pages/
-│   │   └── index.astro   # Homepage (all sections)
-│   └── styles/
-│       └── global.css    # Global styles + neon utilities
-├── docs/                 # Build output (GitHub Pages serves from here)
-│   └── CNAME            # Custom domain config
-├── astro.config.mjs     # Astro configuration
-├── tailwind.config.mjs  # Tailwind configuration
-└── package.json         # Dependencies
+src/
+├── content/
+│   ├── projects/     # one .md per project; drives the header, footer, On Tap and /ontap pages
+│   ├── essays/       # E001.md, E002.md ...
+│   └── rounds/       # R001.md, R002.md ...
+├── content.config.ts # the schemas for all three collections
+├── components/       # Header, Footer, AlembicHome, AlembicReader, Giscus
+├── data/             # projects.js (URLs), stages.js (status ladder), giscus.js, alembic.js, accent.js
+├── layouts/
+│   └── Base.astro    # the shell every page sits in: head tags, header, footer
+├── pages/            # every file here becomes a URL
+└── styles/           # tokens.css, alembic.css, menu-card.css
+public/               # copied into /docs as-is: images, fonts, favicon, CNAME, robots.txt
+docs/                 # build output. Don't edit by hand.
 ```
 
-## 🎨 Color Palette
+`planning/` is gitignored. It holds notes, backups and `planning/archive/`, where retired components and pages from the old site are kept.
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Neon Green | `#00c853` | Primary brand color, CTAs |
-| Neon Purple | `#a855f7` | Secondary accent |
-| Purple Light | `#c084fc` | Highlights, details |
-| Cyan | `#00e5ff` | Tech elements, data viz |
-| Red | `#ff4444` | Warnings, errors |
-| Orange | `#ff9800` | Status indicators |
-| Pure Black | `#000000` | Main background |
-| Dark Grey | `#1c1c1e` | Panels, cards |
-| Dark Blue | `#101221` | Section backgrounds |
+## Writing for the Alembic
 
-## 🧩 Adding New Products
+Add a markdown file to `src/content/essays/` or `src/content/rounds/`. The file name becomes the URL (`E002.md` → `/alembic/essays/e002`).
 
-To add a new product to the showcase:
-
-1. Edit `src/pages/index.astro`
-2. Add a new `<ProductCard>` component in the Products section:
-
-```astro
-<ProductCard
-  title="Your Product Name"
-  description="What it does..."
-  status="In Development" // or "Beta", "Live", "Coming Soon"
-  techStack={['React', 'Python', 'etc']}
-  githubUrl="https://github.com/..."
-  icon="🔥"
->
-  <!-- Optional additional content -->
-</ProductCard>
+```yaml
+---
+title: The title.
+description: One or two sentences. Shown under the title and used as the link preview.
+date: 2026-09-24            # set by hand for now
+author: Patrick Hill        # optional; this is the default
+draft: true                 # flip to false to publish
+projects: [permafrost]      # optional; project slugs, shown as tags that link to the project
+tags: [Architecture]        # optional; plain topic tags
+number: 2                   # rounds only
+---
 ```
 
-## 🎯 Logo Design
+A line of `* * *` in the body renders as the gem divider.
 
-The logo is a custom SVG featuring:
-- Highball glass outline (neon green)
-- Ice cubes with circuit board patterns (cyan)
-- Neural network nodes and connections (purple)
-- Binary code bubbles (0s and 1s) that animate upward
-- Glow effects on hover
+## Adding a project
 
-To customize the logo, edit `src/components/Logo.astro`.
+Add `src/content/projects/<slug>.md`. The slug becomes `/ontap/<slug>`. The frontmatter holds the short fields and the markdown body is the project page.
 
-## 📝 Content Updates
-
-### Tagline
-Current: **"Binary Spirits, Digital Alchemy"**
-
-To change, edit `src/components/Hero.astro`:
-```astro
-<p class="text-2xl md:text-3xl text-gray-300 mb-4 fade-in glow-purple">
-  Your New Tagline Here
-</p>
+```yaml
+---
+order: 7                    # position on the On Tap star
+name: Project Name
+status: Concept             # Concept, Design, Build, Alpha or Released
+icon: /project-icon.png     # file in public/
+scale: 1                    # optical-weight correction for the icon
+line: "One-line jot for the star."
+accent: "#9b2aee"           # sampled from the icon's main colour
+glass: Private              # where it's served: Private, or a link
+ingredients: [Python, TypeScript]
+---
 ```
 
-### About Section
-Edit the "What is Highball Technomancy?" section in `src/pages/index.astro`.
+## Comments
 
-### Contact Info
-Update links in `src/components/Footer.astro` and `src/pages/index.astro` (Contact section).
+Each essay and round gets its own Giscus thread, mapped by page path. Essays post into the **Ideas** discussion category and rounds into **Show and tell**. The ids live in `src/data/giscus.js`.
 
-## 🐛 Troubleshooting
+Don't change those category ids once an entry has comments. Giscus looks for a page's thread inside a single category, so moving categories orphans every existing thread.
 
-**Port already in use:**
-```bash
-# Kill process on port 4321
-npx kill-port 4321
-npm run dev
-```
+## Troubleshooting
 
-**Build fails:**
-```bash
-# Clear Astro cache
-rm -rf .astro
-npm run build
-```
+- **Page looks stale after a deploy:** hard refresh (Ctrl+Shift+R). A deploy that's still propagating can cache a 404 for a single file.
+- **Sitemap or a draft behaving oddly on the dev server:** those are build-time features. Use `npm run build` then `npm run preview`.
+- **Custom domain stops working:** check Settings → Pages. The custom domain should be `technomancyai.com`, the source should be `main` at `/docs`, and HTTPS should be enforced. Then check `public/CNAME` holds a single line.
+- **Port 4321 already in use:** another dev server is still running. Stop it, or run `npx astro dev --port 4322`.
 
-**GitHub Pages not updating:**
-- Check that `/docs` folder is committed
-- Verify `docs/CNAME` contains `technomancyai.com`
-- Check GitHub Pages settings: Settings → Pages → Source = `/docs`
+## The projects
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-This is the official website for Highball Technomancy. For product-specific contributions, see individual project repositories:
-
-- [Permafrost](https://github.com/highball-technomancy/Permafrost) - Grid trading bot
+Every project on the site is private for now, so the site doesn't link to any repositories. When one goes public, its project file's `glass` field gets the link.
 
 ---
 
-Made with ❄️ and 🥃 by the Highball Technomancy team
+Made with ❄️ and 🥃 by the Highball Technomancy technomancers.
