@@ -1,0 +1,17 @@
+---
+import { getWriting, entryUrl } from '../data/alembic.js';
+const [essays, rounds] = await Promise.all([getWriting('essays'), getWriting('rounds')]);
+const features = [
+  { label: 'Essays', entry: essays[0], url: '/alembic/essays', title: 'The thinking behind Frostbyte.', description: 'Our first essay is taking shape: the architecture, and the reasoning behind it.' },
+  { label: 'Rounds', entry: rounds[0], url: '/alembic/rounds', title: 'Letters from the lab.', description: 'Updates from across Highball. Our opening Round is on its way.' },
+];
+---
+<section class="alembic-home" aria-labelledby="alembic-home-title">
+  <div class="ah-heading"><div><h2 id="alembic-home-title"><a href="/alembic">The Alembic</a></h2></div><p class="ah-intro">Essays on the ideas behind the work.<br />Rounds checking in on the projects and the lab.</p></div>
+  <div class="ah-features">{features.map((f) => <article><p class="ah-label">{f.label}{f.entry?.data.draft && ' / Draft preview'}</p><h3><a href={f.entry ? entryUrl(f.entry) : f.url}>{f.entry?.data.title ?? f.title}</a></h3><p>{f.entry?.data.description ?? f.description}</p><a class="ah-link" href={f.entry ? entryUrl(f.entry) : f.url}>{f.entry ? `Read the latest ${f.label === 'Essays' ? 'essay' : 'round'}` : `Visit ${f.label}`} ↗</a></article>)}</div>
+  <a class="ah-link ah-more" href="/alembic">Visit The Alembic →</a>
+</section>
+<style>
+@font-face{font-family:'Typical Writer';src:url('/fonts/typical-writer-font/TypicalWriter-G3LO.ttf') format('truetype');font-display:swap}
+.alembic-home{padding:130px 0 90px}.ah-heading{display:flex;align-items:center;justify-content:space-between;gap:35px;margin-bottom:36px}.ah-heading h2{font:34px Technomancy;color:var(--bright);margin:0}.ah-tagline{font:16px 'Typical Writer';color:#c0accf;margin:14px 0 0}.ah-intro{font-size:14px;line-height:1.8;color:#a6a6b4;margin:0}.ah-features{display:grid;grid-template-columns:1fr 1fr;gap:42px}.ah-features article{border-top:1px solid #34343e;padding-top:20px}.ah-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#bca6d1}.ah-features h3{font:400 25px/1.3 var(--serif);color:var(--bright);margin:17px 0}.ah-features article>p:not(.ah-label){font-size:14px;line-height:1.8;color:#a6a6b4}.ah-link{font-size:13px;color:#cdb0e7}.ah-link:hover{text-decoration:underline}.ah-more{display:inline-block;margin-top:32px;color:var(--accent)}a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}@media(max-width:650px){.ah-heading{display:block}.ah-intro{margin-top:25px}.ah-features{grid-template-columns:1fr;gap:28px}.alembic-home{padding-top:80px}}
+</style>

@@ -1,44 +1,43 @@
 ---
-// Giscus.astro - Comment section powered by GitHub Discussions
+// Giscus.astro — one comment thread, styled for the redesign. Replaces the old
+// site's "Community Feedback" block (that version is in git history).
+// `key` picks the category (essays | rounds | openBar); `term` names the thread when the
+// mapping is by term — entries map by pathname instead, so each essay and round
+// gets its own thread automatically.
+import { giscus, configured } from '../data/giscus.js';
+const { key = 'essays', term, label = 'Comments' } = Astro.props;
+const cat = giscus.categories[key];
+const ready = configured(key);
 ---
-
-<section id="feedback" class="py-20 bg-dark-bg-alt">
-  <div class="container mx-auto px-6">
-    <h2 class="text-5xl font-bold text-center mb-6 glow-green">Community Feedback</h2>
-    <p class="text-xl text-gray-300 text-center max-w-2xl mx-auto mb-12">
-      Share your thoughts, ask questions, or just say hi! Comments are powered by GitHub Discussions.
-    </p>
-    
-    <div class="max-w-4xl mx-auto glass rounded-xl p-8 border border-white/10">
-      <!-- Giscus Comments -->
-      <script 
-        src="https://giscus.app/client.js"
-        data-repo="highball-technomancy/highball-technomancy.github.io"
-        data-repo-id="R_kgDOQ9Oj_A"
-        data-category="General"
-        data-category-id="DIC_kwDOQ9Oj_M4C1S1R"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="dark"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-      </script>
-    </div>
-  </div>
+<section class="giscus-block" aria-label={label}>
+  <h2 class="giscus-head">{label}</h2>
+  {ready ? (
+    <script src="https://giscus.app/client.js"
+      data-repo={giscus.repo}
+      data-repo-id={giscus.repoId}
+      data-category={cat.name}
+      data-category-id={cat.id}
+      data-mapping={term ? 'specific' : 'pathname'}
+      data-term={term}
+      data-strict="1"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="dark_dimmed"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async></script>
+  ) : (
+    <p class="giscus-off">[Comments aren’t switched on yet — needs the ids in
+      src/data/giscus.js.]</p>
+  )}
 </section>
 
-<style>
-  /* Giscus theme customization */
-  :global(.giscus) {
-    width: 100%;
-  }
-  
-  :global(.giscus-frame) {
-    border: none !important;
-  }
+<style is:global>
+.giscus-block{margin-top:80px;padding-top:28px;border-top:1px solid var(--rule-soft)}
+.giscus-head{font:11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
+  color:#6f6f7d;margin:0 0 22px}
+.giscus-off{font:13.5px/1.7 var(--sans);color:#6f6f7d;margin:0}
+:global(.giscus),:global(.giscus-frame){width:100%;border:none}
 </style>

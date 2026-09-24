@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/alembic.css';
+import { getWriting, entryUrl, formatDate, latestProjectUpdate } from '../../data/alembic.js';
+import { getProjects, projectUrl } from '../../data/projects.js';
+import { stages, stageColors } from '../../data/stages.js';
+const [essays, rounds, projects] = await Promise.all([getWriting('essays'), getWriting('rounds'), getProjects()]);
+const essay = essays[0], round = rounds[0];
+---
+<Base title="The Alembic — Highball Technomancy">
+<main class="wrap alembic">
+  <div class="masthead"><div><p class="eyebrow">Highball Technomancy / The workbench</p><h1>The Alembic</h1><p class="tagline">where madmen scribble</p></div><p class="intro">Essays on the ideas behind the work.<br />Rounds checking in on the projects and the lab.</p></div>
+  <nav class="sections" aria-label="The Alembic"><a href="/alembic/essays">ESSAYS</a><a href="/alembic/rounds">ROUNDS</a><a href="https://github.com/highball-technomancy/highball-technomancy.github.io/discussions">OPEN BAR</a><a href="#bench">ON THE BENCH</a><span>An open notebook, in occasional installments.</span></nav>
+  <div class="editorial">
+    <section class="essay"><h2 class="section-name">Essays <span>Ideas & architecture</span></h2>
+      {essay ? <><div class="meta">Latest essay{essay.data.draft && ' / Draft preview'}</div><h3 class="feature-title"><a href={entryUrl(essay)}>{essay.data.title}</a></h3><p class="deck">{essay.data.description}</p><a class="read" href={entryUrl(essay)}>Read the essay ↗</a></> : <><h3 class="feature-title">The first essay is taking shape.</h3><p class="deck">Frostbyte, and the reasoning behind its architecture.</p><a class="read" href="/alembic/essays">Visit Essays ↗</a></>}
+    </section>
+    <section class="round"><h2 class="section-name">Rounds <span>Letters from the lab</span></h2>
+      {round ? <><span class="number" aria-hidden="true">{String(round.data.number).padStart(3, '0')}</span><div class="meta">Across Highball{round.data.draft && ' / Draft preview'}</div><h3 class="feature-title"><a href={entryUrl(round)}>{round.data.title}</a></h3><p class="deck">{round.data.description}</p><a class="read" href={entryUrl(round)}>Read the latest Round ↗</a></> : <><h3 class="feature-title">The opening Round is on its way.</h3><p class="deck">Updates from across Highball, starting with the site overhaul.</p><a class="read" href="/alembic/rounds">Visit Rounds ↗</a></>}
+    </section>
+  </div>
+  <section class="ledger" id="bench"><div class="ledger-title"><h2>On the bench</h2><p>Where the projects stand. Updates from published Rounds.</p></div>
+    <div class="stage-key" aria-label="Project stages">{stages.map((s) => <span><i class="dot" style={`--tone:${stageColors[s]}`}></i>{s}</span>)}</div>
+    <table><thead><tr><th scope="col">Project</th><th scope="col">Step</th><th scope="col">Latest update</th></tr></thead><tbody>
+      {projects.map((p) => { const update = latestProjectUpdate(rounds, p.id); return <tr><td><a href={projectUrl(p)}>{p.name}</a></td><td><span class="dot" style={`--tone:${stageColors[p.status]}`}></span>{p.status}</td><td>{update ? <a href={entryUrl(update)} title={update.data.title}><time datetime={update.data.date.toISOString()}>{formatDate(update.data.date)}</time></a> : 'Not yet published'}</td></tr>; })}
+    </tbody></table>
+  </section>
+</main>
+</Base>

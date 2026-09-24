@@ -1,0 +1,41 @@
+---
+import { render } from 'astro:content';
+import { entryUrl, formatDate } from '../data/alembic.js';
+import { getProjects, projectUrl } from '../data/projects.js';
+import { accentText } from '../data/accent.js';
+import Giscus from './Giscus.astro';
+const { entry, entries, kind } = Astro.props;
+const { Content } = await render(entry);
+const projects = await getProjects();
+const tagged = projects.filter((p) => entry.data.projects.some((ref) => ref.id === p.id));
+---
+<div class="reading-room">
+  <aside class="alembic-contents">
+    <a class="back" href="/alembic">← The Alembic</a>
+    <details open>
+      <summary>Browse {kind}</summary>
+      <nav aria-label={kind}>
+        {entries.map((item) => <a href={entryUrl(item)} aria-current={item.id === entry.id ? 'page' : undefined}>
+          {item.data.title}
+          <small>{kind === 'rounds' ? `ROUND ${String(item.data.number).padStart(3, '0')} · ` : ''}{item.data.draft ? 'DRAFT' : formatDate(item.data.date)}</small>
+        </a>)}
+      </nav>
+    </details>
+  </aside>
+  <article class="article-content">
+    <div class="meta">{kind === 'rounds' ? `Round ${String(entry.data.number).padStart(3, '0')}` : 'Essay'}{entry.data.draft ? ' / Draft · local preview' : ''}</div>
+    <h1>{entry.data.title}</h1>
+    <p class="byline">Written by: {entry.data.author}<br /><time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time></p>
+    {(tagged.length > 0 || entry.data.tags.length > 0) && <div class="tags" aria-label="Topics">
+      {tagged.map((p) => <a class="chip" href={projectUrl(p)} style={`--chip:${p.accent};--chip-text:${accentText(p.accent)}`}>{p.name}</a>)}
+      {entry.data.tags.map((tag) => <span>{tag}</span>)}
+    </div>}
+    <p class="standfirst">{entry.data.description}</p>
+    <div class="prose"><Content /></div>
+    <Giscus key={kind} label="Comments" />
+  </article>
+</div>
+<script>
+  const contents = document.querySelector('.alembic-contents details');
+  if (contents && window.matchMedia('(max-width:650px)').matches) contents.removeAttribute('open');
+</script>

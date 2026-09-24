@@ -1,0 +1,80 @@
+---
+// Header.astro — the one header. Every redesign page gets this exact markup,
+// so the crest and lockup cannot drift between pages.
+// The On Tap dropdown reads from the shared project records, so adding or
+// renaming a project updates the nav everywhere with no page edits.
+import { getProjects, projectUrl } from '../data/projects.js';
+
+const projects = await getProjects();
+const wordmark = 'TECHNOMANCY'.split('');
+---
+
+<nav class="nav">
+  <a class="brand" href="/">
+    <img src="/logo-blackbg2.png" width="50" height="75" alt="Highball Technomancy" />
+    <span>
+      <span class="bh">HIGHBALL</span>
+      <span class="bt">{wordmark.map((c) => <span>{c}</span>)}</span>
+    </span>
+  </a>
+  <div class="nl">
+    <a href="/alembic" aria-current={Astro.url.pathname.startsWith('/alembic') ? 'page' : undefined}>The Alembic</a>
+    <div class="dd">
+      <a class="dd-link" href="/ontap">On Tap</a>
+      <div class="ddm">
+        {projects.map((p) => <a href={projectUrl(p)}>{p.name}</a>)}
+      </div>
+    </div>
+    <a href="/lab" aria-current={Astro.url.pathname.startsWith('/lab') ? 'page' : undefined}>The Lab</a>
+    <a href="/contact" aria-current={Astro.url.pathname.startsWith('/contact') ? 'page' : undefined}>Contact</a>
+  </div>
+</nav>
+
+<style>
+/* #17171e, NOT var(--ink) — the page is already --ink, so using it here paints
+   charcoal on identical charcoal and nothing reads as a bar. Full-bleed via the
+   ::before so the band runs edge to edge while the content stays in the wrap.
+   3px of charcoal below the crest and no more — the band hugs the lockup. */
+.nav{position:relative;display:flex;align-items:center;justify-content:space-between;
+  padding:3px 0;border-bottom:1px solid var(--rule);background:#17171e;}
+/* Centred full-bleed: exactly one viewport wide, centred on the nav. The older
+   left:-50vw/right:-50vw version was half a viewport too wide on each side, and
+   the right-hand overhang added ~626px of empty horizontal scroll to every page
+   — which also shoved centred content leftwards at narrow widths. */
+.nav::before{content:'';position:absolute;top:0;bottom:-1px;left:50%;width:100vw;
+  transform:translateX(-50%);
+  background:#17171e;border-bottom:1px solid var(--rule);z-index:-1;}
+
+.brand{display:flex;align-items:center;gap:12px;}
+/* the crest is 1024x1536, so 50 wide is 75 tall — the attributes say so too,
+   which keeps the reserved space right during load */
+.brand img{display:block;}
+.bh{display:block;font-family:'Technomancy',var(--sans);font-size:25px;
+  letter-spacing:.11em;color:var(--bright);margin-right:-.11em;white-space:nowrap;}
+.bt{display:flex;justify-content:space-between;width:100%;
+  font-family:'Technomancy',var(--sans);font-size:10.4px;color:#b0b0bc;}
+
+/* Nav in the wordmark face, but tracked normally — NOT the justified per-letter
+   treatment the lockup uses. */
+.nl{display:flex;gap:30px;align-items:center;
+  font-family:'Technomancy',var(--sans);font-size:15px;letter-spacing:.05em;
+  color:#a2a2b0;}
+.nl a:hover{color:var(--bright);}
+.nl a[aria-current="page"]{color:var(--bright);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:7px;}
+
+.dd{position:relative;}
+.dd-link{display:block;}
+.dd-link::after{content:' ⌄';color:#5f5f6c;}
+.dd:hover .dd-link,.dd:focus-within .dd-link{color:var(--bright);}
+.ddm{position:absolute;top:100%;left:-14px;z-index:5;min-width:200px;visibility:hidden;
+  background:#15151b;border:1px solid #26262e;padding:6px;}
+.dd:hover .ddm,.dd:focus-within .ddm{visibility:visible;}
+.ddm a{display:block;padding:7px 10px;font-size:13px;color:#a2a2b0;}
+.ddm a:hover{background:#1c1c23;color:var(--bright);}
+.nl a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+@media (max-width:760px){
+  .nav{flex-wrap:wrap;padding-bottom:14px;}
+  .nl{width:100%;justify-content:space-between;gap:14px;padding-top:10px;font-size:13px;}
+}
+</style>

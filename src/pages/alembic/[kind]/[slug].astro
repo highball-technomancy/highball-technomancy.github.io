@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import AlembicReader from '../../../components/AlembicReader.astro';
+import { getWriting } from '../../../data/alembic.js';
+import '../../../styles/alembic.css';
+export async function getStaticPaths() {
+  const groups = await Promise.all(['essays', 'rounds'].map(async (kind) => {
+    const entries = await getWriting(kind);
+    return entries.map((entry) => ({ params: { kind, slug: entry.id }, props: { kind, entry, entries } }));
+  }));
+  return groups.flat();
+}
+const { kind, entry, entries } = Astro.props;
+---
+<Base title={`${entry.data.title} — The Alembic`} description={entry.data.description}><main class="wrap alembic"><AlembicReader entry={entry} entries={entries} kind={kind} /></main></Base>
