@@ -27,7 +27,7 @@ const writingSchema = z.object({
   title: z.string(),
   description: z.string(),
   date: z.coerce.date(),
-  author: z.string().default('Patrick Hill'),   // byline; one name per entry for now
+  author: z.string().trim().min(1, 'Every essay and round needs an author.'),   // byline; one name per entry for now, no default
   draft: z.boolean().default(false),
   projects: z.array(reference('projects')).default([]),
   tags: z.array(z.string()).default([]),

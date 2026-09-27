@@ -38,4 +38,70 @@ const tagged = projects.filter((p) => entry.data.projects.some((ref) => ref.id =
 <script>
   const contents = document.querySelector('.alembic-contents details');
   if (contents && window.matchMedia('(max-width:650px)').matches) contents.removeAttribute('open');
+
+  // Click to enlarge: an image shown smaller than its real size opens full-screen,
+  // at its real resolution (shrunk only to fit the screen, never blown up).
+  const prose = document.querySelector('.article-content .prose');
+  if (prose) {
+    const box = document.createElement('div');
+    box.className = 'alembic-lightbox';
+    box.hidden = true;
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Enlarged image');
+    box.innerHTML = '<button class="alembic-lightbox-close" type="button" aria-label="Close">×</button><figure><img alt="" /><figcaption></figcaption></figure>';
+    document.body.append(box);
+    const big = box.querySelector('img');
+    const cap = box.querySelector('figcaption');
+    const closeBtn = box.querySelector('.alembic-lightbox-close');
+    let from = null;
+
+    const mark = (img) => {
+      const zoom = img.naturalWidth > img.clientWidth * 1.05;
+      img.classList.toggle('zoomable', zoom);
+      if (zoom) {
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', `${img.alt ? img.alt + ': ' : ''}enlarge image`);
+      } else {
+        img.removeAttribute('tabindex');
+        img.removeAttribute('role');
+        img.removeAttribute('aria-label');
+      }
+    };
+    const markAll = () => prose.querySelectorAll('img').forEach((img) => (img.complete ? mark(img) : img.addEventListener('load', () => mark(img), { once: true })));
+    markAll();
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(markAll, 150); });
+
+    const open = (img) => {
+      from = img;
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt;
+      const text = img.closest('figure')?.querySelector('figcaption')?.textContent || '';
+      cap.textContent = text;
+      cap.hidden = !text;
+      box.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      closeBtn.focus();
+    };
+    const shut = () => {
+      box.hidden = true;
+      big.removeAttribute('src');
+      document.documentElement.style.overflow = '';
+      from?.focus();
+      from = null;
+    };
+    prose.addEventListener('click', (e) => { const img = e.target.closest('img.zoomable'); if (img) open(img); });
+    prose.addEventListener('keydown', (e) => {
+      const img = e.target.closest && e.target.closest('img.zoomable');
+      if (img && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(img); }
+    });
+    box.addEventListener('click', shut);
+    document.addEventListener('keydown', (e) => {
+      if (box.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); shut(); }
+      else if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); } // keep focus inside while open
+    });
+  }
 </script>
